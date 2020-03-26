@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" data-layout-decorate="~{fragments/layout}">
+    <head>
+        <title>Home</title>
+    </head>
+
+    <body>
+        <!-- page content -->
+        <div class="right_col" role="main" data-layout-fragment="content">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3> <span data-th-text="#{application_parameter_semestre_form_titre}"></span></h3>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="row">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <form   data-th-action="@{/parametres/enregister/ecole}"  method="post">
+                                <div class="col-xs-6 form-group">
+                                    <label>Label1</label>
+                                    <input class="form-control" type="text"/>
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Label2</label>
+                                    <input class="form-control" type="text"/>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="row">
+                                        <label class="col-xs-12">Label3</label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6">
+                                            <input class="form-control" type="text"/>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6">
+                                            <input class="form-control" type="text"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 form-group">
+                                    <label>Label4</label>
+                                    <input class="form-control" type="text"/>
+                                </div>
+                                <input type="submit" value="Submit" class="btn btn-primary btn-valider"/>
+                            </form> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /page content -->   
+    </body>
+</html>
