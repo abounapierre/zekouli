@@ -5,70 +5,77 @@
  */
 package com.abouna.zekouli_ui.configs;
 
-import java.util.Locale;
-import nz.net.ultraq.thymeleaf.LayoutDialect;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.context.annotation.Description;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
-import org.thymeleaf.ITemplateEngine;
-import org.thymeleaf.spring4.SpringTemplateEngine;
-import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
-import org.thymeleaf.spring4.view.ThymeleafViewResolver;
-import org.thymeleaf.templatemode.TemplateMode;
-import org.thymeleaf.templateresolver.ITemplateResolver;
+import org.thymeleaf.spring5.SpringTemplateEngine;
+import org.thymeleaf.spring5.view.ThymeleafViewResolver;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+
+import nz.net.ultraq.thymeleaf.LayoutDialect;
+
 
 /**
  *
  * @author abouna
  */
 @Configuration
-public class ZekouliUIConfig extends WebMvcConfigurerAdapter{
-     @Bean
-    public ViewResolver viewResolver() {
-        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-        viewResolver.setTemplateEngine(templateEngine());
-        return viewResolver;
-    }
+public class ZekouliUIConfig implements  WebMvcConfigurer {
+	 @Bean
+	    @Description("Thymeleaf template resolver serving HTML 5")
+	    public ClassLoaderTemplateResolver templateResolver() {
 
-    @Bean
-    public ITemplateEngine templateEngine() {
-        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-        templateEngine.setTemplateResolver(templateRsolver());
-        templateEngine.setDialect(new LayoutDialect());
-        return templateEngine;
-    }
+	    	ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
 
-    private ITemplateResolver templateRsolver() {
-        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-        templateResolver.setTemplateMode(TemplateMode.HTML);
-        templateResolver.setCharacterEncoding("UTF-8");
-        templateResolver.setCacheable(false);
-        templateResolver.setPrefix("classpath:/templates/");
-        templateResolver.setSuffix("*.html");
-        return templateResolver;
-    }
+	        templateResolver.setPrefix("templates/");
+	        templateResolver.setCacheable(false);
+	        templateResolver.setSuffix(".html");
+	        templateResolver.setTemplateMode("HTML");
+	        templateResolver.setCharacterEncoding("UTF-8");
 
-    @Bean
-    public LocaleResolver localeResolver() {
-        SessionLocaleResolver slr = new SessionLocaleResolver();
-        slr.setDefaultLocale(Locale.US);
-        return slr;
-    }
+	        return templateResolver;
+	    }
 
-    @Bean
-    public LocaleChangeInterceptor localeChangeInterceptor() {
-        LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
-        lci.setParamName("lang");
-        return lci;
-    }
+	    @Bean
+	    @Description("Thymeleaf template engine with Spring integration")
+	    public SpringTemplateEngine templateEngine() {
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(localeChangeInterceptor());
-    }
+	    	SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+	        templateEngine.setTemplateResolver(templateResolver());
+	        templateEngine.addDialect(new LayoutDialect());
+	        return templateEngine;
+	    }
+
+	    @Bean
+	    @Description("Thymeleaf view resolver")
+	    public ViewResolver viewResolver() {
+
+	    	ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+
+	        viewResolver.setTemplateEngine(templateEngine());
+	        viewResolver.setCharacterEncoding("UTF-8");
+
+	        return viewResolver;
+	    }
+	    
+	    @Bean
+	    public LocaleChangeInterceptor localeChangeInterceptor() {
+	        LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
+	        lci.setParamName("lang");
+	        return lci;
+	    }
+
+	    @Override
+	    public void addInterceptors(InterceptorRegistry registry) {
+	        registry.addInterceptor(localeChangeInterceptor());
+	    }
+
+	    /*@Override
+	    public void addViewControllers(ViewControllerRegistry registry) {
+	        registry.addViewController("/").setViewName("home");
+	    }*/
 }

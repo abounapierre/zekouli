@@ -1,111 +1,87 @@
 <!DOCTYPE html>
-<html lang="en" data-layout-decorate="~{fragments/layout}">
-    <head>
-        <title>Classe</title>
-    </head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/layout}">
+<head>
+<title>[[#{application_parametre_classe_page_titre}]]</title>
+</head>
 
-    <body>
-        <!-- page content -->
-        <div class="right_col" role="main" data-layout-fragment="content">
-            <div class="">
-                <div class="page-title">
-                    <div class="title_left">
-                        <h3>Classe</h3>
-                    </div>
-                </div>
+<body>
+	<!-- page content -->
+	<div class="right_col" role="main" data-layout-fragment="content">
+		<div class="">
+			<div class="page-title">
+				<div class="title_left">
+					<h3>[[#{application_parametre_classe_form_titre}]]</h3>
+				</div>
+			</div>
 
-                <div class="clearfix"></div>
+			<div class="clearfix"></div>
+			<div class="row">
+				<div class="x_panel">
+					<div class="x_content">
+					<!-- debut formulaire -->
+						<form data-th-action="@{/classe/enregister}"
+							th:object="${classeModel}" method="post">
+							<div>
+								<div class="col-xs-6 form-group">
+									<label>[[#{application_parametre_classe_form_libelle}]]</label>
+									<input class="form-control" id="" type="text"
+										th:field=" *{libelle}" />
+								</div>
+								<div class="col-xs-6 form-group">
+									<label>[[#{application_parametre_classe_form_code}]]</label> <input
+										class="form-control" type="text" id="code" th:field=" *{code}" />
+								</div>
+								<div class="col-xs-6 form-group">
+									<label>[[#{application_parametre_classe_form_etablissement}]]</label>
+									<select id="etablissement" class="form-control">
+										<option value="">--</option>
+										<option data-th-each="etablissement : ${etablissements}"
+											data-th-value="${etablissement.id}"
+											data-th-utext="${etablissement.nom}" />
+									</select>
+								</div>
+								<div class="col-xs-6 form-group">
+									<label>[[#{application_parametre_classe_form_niveau}]]</label>
+									<select id="niveau" class="form-control">
+										<option value=""></option>
+										<option data-th-each="niveau : ${niveaux}"
+											data-th-value="${niveau.countryId}"
+											data-th-utext="${niveau.libelle}" />
+									</select>
+								</div>
 
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="x_panel">
+								<div class="col-xs-6 form-group">
+									<label>[[#{application_parametre_classe_form_cycle}]]</label> <select
+										id="cycle" class="form-control">
+										<option value=""></option>
+										<option data-th-each="cycle : ${cycles}"
+											data-th-value="${cycle.id}" data-th-utext="${cycle.libelle}" />
+									</select>
+								</div>
+								<div class="col-xs-6 form-group">
+									<label>[[#{application_parametre_classe_form_serie}]]</label> <select
+										id="serie" class="form-control" th:field=" *{serie}">
+										<option value=""></option>
+										<option data-th-each="serie: ${series}"
+											data-th-value="${serie.id}" data-th-utext="${serie.libelle}" />
+									</select>
+								</div>
 
-                            <div class="x_content">
-                                <form   data-th-action="@{/parametres/enregister/ecole}"  method="post">
-                                    <div class="form-group">
-                                        <label for="filiere" class="form-control-label"><span data-th-text="#{application_parametre_ecole_form_nom}"></span></label>
-                                        <select id="filiere" class="form-control">
-                                            <option value=""> -- </option>
-                                            <!--                                            <option data-th-each="country : ${countries}"
-                                                                                                data-th-value="${country.countryId}"
-                                                                                                data-th-utext="${country.countryName}"/>-->
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="filiere" class="form-control-label"><span data-th-text="#{application_parametre_ecole_form_nom}"></span></label>
-                                        <select id="filiere" class="form-control">
-                                            <option value=""> -- </option>
-                                            <!--                                            <option data-th-each="country : ${countries}"
-                                                                                                data-th-value="${country.countryId}"
-                                                                                                data-th-utext="${country.countryName}"/>-->
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="filiere" class="form-control-label"><span data-th-text="#{application_parametre_ecole_form_nom}"></span></label>
-                                        <select id="filiere" class="form-control">
-                                            <option value=""> -- </option>
-                                            <!--                                            <option data-th-each="country : ${countries}"
-                                                                                                data-th-value="${country.countryId}"
-                                                                                                data-th-utext="${country.countryName}"/>-->
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="filiere" class="form-control-label"><span data-th-text="#{application_parametre_ecole_form_nom}"></span></label>
-                                        <select id="filiere" class="form-control">
-                                            <option value=""> -- </option>
-                                            <!--                                            <option data-th-each="country : ${countries}"
-                                                                                                data-th-value="${country.countryId}"
-                                                                                                data-th-utext="${country.countryName}"/>-->
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="code" class="form-control-label"><span data-th-text="#{application_parametre_ecole_form_code}"></span></label>
-                                        <input type="text" class="form-control"  id="code"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nom" class="form-control-label"><span data-th-text="#{application_parametre_ecole_form_adresse}"></span></label>
-                                        <input type="text" class="form-control"  id="nom"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nom" class="form-control-label"><span data-th-text="#{application_parametre_ecole_form_adresse}"></span></label>
-                                        <input type="text" class="form-control"  id="nom"/>
-                                    </div>
-                                    <input type="submit" value="Submit" class="btn btn-primary"/>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-xs-6 form-group">
-                        <label>Label1</label>
-                        <input class="form-control" type="text"/>
-                    </div>
-                    <div class="col-xs-6 form-group">
-                        <label>Label2</label>
-                        <input class="form-control" type="text"/>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="row">
-                            <label class="col-xs-12">Label3</label>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-6">
-                                <input class="form-control" type="text"/>
-                            </div>
-                            <div class="col-xs-12 col-sm-6">
-                                <input class="form-control" type="text"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 form-group">
-                        <label>Label4</label>
-                        <input class="form-control" type="text"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /page content -->   
-    </body>
+								<input type="submit" th:value="#{application_bouton_valider}"
+									class="btn btn-primary btn-valider" /> <a type="reset"
+									th:text="#{application_bouton_annuler}"
+									th:href="@{/classe/annuler}"
+									class="btn btn-warning btn-annuler"></a>
+							</div>
+						</form>
+						<!-- fin formulaire -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /page content -->
+</body>
 </html>

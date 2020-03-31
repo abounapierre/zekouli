@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -34,13 +34,13 @@
             <div class="clearfix"></div>
 
             <!-- menu profile quick info -->
-           <div data-th-replace="fragments/fragment-menu-profile-quick-info :: menu-profile-quick-info"></div>
+           <div th:replace="fragments/fragment-menu-profile-quick-info :: menu-profile-quick-info"></div>
             <!-- /menu profile quick info -->
 
             <br />
 
             <!-- sidebar menu -->
-            <div data-th-replace="fragments/fragment-slider-menu-bar :: slider-menu-bar"></div>
+            <div th:replace="fragments/fragment-slider-menu-bar :: slider-menu-bar"></div>
             <!-- /sidebar menu -->
 
             <!-- /menu footer buttons -->
@@ -63,29 +63,29 @@
         </div>
 
         <!-- top navigation -->
-        <div data-th-replace="fragments/fragment-top-nav-bar :: top-nav-bar"></div>
+        <div th:replace="fragments/fragment-top-nav-bar :: top-nav-bar"></div>
         <!-- /top navigation -->
 
         <!-- page content -->
-        <div data-layout-fragment="content"></div>
+        <div layout:fragment="content"></div>
         <!-- /page content -->
 
         <!-- footer content -->
-        <div data-th-replace="fragments/fragment-footer :: footer-content"></div>
+        <div th:replace="fragments/fragment-footer :: footer-content"></div>
         <!-- /footer content -->
       </div>
     </div>
 
     <!-- jQuery -->
-    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <!-- Bootstrap -->
-    <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     <!-- FastClick -->
-    <script src="/webjars/fastclick/fastclick.js"></script>
+    <script th:src="@{/webjars/fastclick/fastclick.js}"></script>
     <!-- NProgress -->
-    <script src="/webjars/nprogress/nprogress.js"></script>
+    <script th:src="@{/webjars/nprogress/nprogress.js}"></script>
     
     <!-- Custom Theme Scripts -->
-    <script src="/js/custom.min.js"></script>
+    <script th:src="@{/js/custom.min.js}"></script>
   </body>
 </html>

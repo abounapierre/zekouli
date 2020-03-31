@@ -9,4 +9,66 @@ and open the template in the editor.
 */
 .btn-valider{
     float: right;
+    background-color: #00996f;
+}
+
+.btn-annuler{
+    float: right;
+    background-color: #eea236;
+}
+
+ .table-fixed {
+	 width: 100%;
+	 background-color: #f3f3f3;
+}
+ .table-fixed tbody {
+	 height: 350px;
+	 overflow-y: auto;
+	 width: 100%;
+}
+ .table-fixed thead, .table-fixed tbody, 
+ .table-fixed tr, .table-fixed td, .table-fixed th {
+	 display: block;
+}
+ .table-fixed tbody td {
+	 float: left;
+	 min-height: 3px;
+	 background-color: white;
+	 color : black;
+}
+ .table-fixed thead tr th {
+	 float: left;
+	 background-color: #00996f;
+	 border-color: #00996f;
+	 color: white;
+}
+
+.table-fixed>tbody>tr>td, .table-fixed>tbody>tr>th, .table-fixed>tfoot>tr>td, 
+.table-fixed>tfoot>tr>th, .table-fixed>thead>tr>td, .table-fixed>thead>tr>th {
+    line-height: 3;
+}
+
+.btn_table{
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
+
+.btn_table_suppr{
+	background-color: #b71616;
+}
+
+.btn_table_modif{
+	background-color:  #00996f;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.item {
+    width: 120px;
+    min-height: 120px;
+    max-height: auto;
+    float: left;
 }

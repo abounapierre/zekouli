@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" data-layout-decorate="~{fragments/layout}">
+<head>
+<title>Ecole</title>
+</head>
+
+<body>
+	<!-- page content -->
+	<div class="right_col" role="main" data-layout-fragment="content">
+		<div class="">
+			<div class="page-title">
+				<div class="title_left">
+					<h3>Ecole</h3>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="x_panel">
+						<div class="x_content">
+							<form data-th-action="@{/paramerteres/enregister/etablissement}"
+								method="post">
+								<div>
+									<div class="col-xs-6 form-group">
+										<label>Label1</label> <input class="form-control" type="text" />
+									</div>
+									<div class="col-xs-6 form-group">
+										<label>Label2</label> <input class="form-control" type="text" />
+									</div>
+									<div class="col-xs-6">
+										<div class="row">
+											<label class="col-xs-12">Label3</label>
+										</div>
+										<div class="row">
+											<div class="col-xs-12 col-sm-6">
+												<select id="filiere" class="form-control">
+													<option value="">--</option>
+													<!--                                            <option data-th-each="country : ${countries}"
+                                                                                                data-th-value="${country.countryId}"
+                                                                                                data-th-utext="${country.countryName}"/>-->
+												</select>
+											</div>
+											<div class="col-xs-12 col-sm-6">
+												<input class=" btn btn-primary" value="..." type="button" />
+											</div>
+										</div>
+									</div>
+									<div class="col-xs-6 form-group">
+										<label>Label4</label> <input
+											class="form-control btn btn-primary" type="button" />
+									</div>
+									<input type="submit" th:value="#{application_bouton_valider}"
+										class="btn btn-primary btn-valider" />
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="x_panel">
+				<table
+					class="table table-sm table-dark table-bordered table-striped mb-0">
+					<thead>
+						<tr>
+							<th scope="col">Libelle</th>
+							<th scope="col">Code</th>
+							<th scope="col">Email</th>
+							<th scope="col">Site web</th>
+							<th scope="col">Type d'établissement</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="classe : ${classes}">
+							<td th:text="${classe.libelle}"></td>
+							<td th:text="${classe.code}"></td>
+							<td th:text="${classe.email}"></td>
+							<td th:text="${classe.site}"></td>
+							<td th:text="${etablissement.typeEtablissement.nom}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- /page content -->
+</body>
+</html>

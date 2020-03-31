@@ -15,39 +15,20 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author abouna
  */
 @Controller
-public class HomeController {
+public class HomeController extends AbstractController{   
     
-    @GetMapping("/plain_page")
-    public String plainPage(){
-        return "plain_page";
-    }
-    
-    
-    @GetMapping("/")
-    public String index(Model model){
+    @GetMapping("/home")
+    public String getHome(Model model){
         model.addAttribute("user-profil", "/images/img.jpg");
         return "home";
     }
     
-    @GetMapping("/princing-tables")
-    public String princingTables(){
-        return "princing-tables";
-    }
-    
-     @GetMapping("/home")
-    public String getHome(){
-        return "home";
-    }
-    
-    @GetMapping("/ecole")
-    public String getEcole(){
-        return "parametre/ecole";
-    }
-    
-    
-    /* @GetMapping("/princing-tables")
-    public String princingTables(){
-        return "princing-tables";
-    }*/
+
+	@Override
+	@GetMapping("/")
+	public String getTemplate(Model model) {
+		return "home";
+	}
+      
     
 }
