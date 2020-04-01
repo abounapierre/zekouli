@@ -1,9 +1,7 @@
 package com.abouna.zekouli_ui.data.models;
 
-import java.io.Serializable;
-
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,16 +11,24 @@ import lombok.experimental.FieldDefaults;
 
 @FieldDefaults(level=AccessLevel.PRIVATE)
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(of= {"nom"})
-@ToString(of= {"nom","id"})
-public class TypeEtablissementModel implements Serializable{
+@EqualsAndHashCode(callSuper=false,of= {"libelle","code"})
+@ToString(callSuper=true,of= {"libelle","code"})
+public class TypeEtablissementModel extends AbstractModel{
 	/**
 	 * 
 	 */
 	static final long serialVersionUID = 1051860772081040152L;
-	String nom;
-	Integer id;
+	String libelle;
+	String code;
+	
+	/*@Builder
+	public TypeEtablissementModel(Long id, String utilisateur, String dateCreation, String dateModification,String libelle,String code) {
+		super(id, utilisateur, dateCreation, dateModification);
+		this.libelle =libelle ;
+		this.code = code;
+	}*/
+	
+	
 }

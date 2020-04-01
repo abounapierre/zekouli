@@ -17,15 +17,15 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper=false,of= {"nom","code"})
-@ToString(of= {"nom","code","email","site"})
+@EqualsAndHashCode(callSuper=false,of= {"libelle","code"})
+@ToString(callSuper=true,of= {"libelle","code","email","site"})
 public class EtablissementModel extends AbstractModel{
 	/**
 	 * serial number.
 	 */
 	static final long serialVersionUID = 2653318469846302778L;
 	@NotNull
-	String nom;
+	String libelle;
 	@NotNull
 	String code;
 	@Email
@@ -35,5 +35,7 @@ public class EtablissementModel extends AbstractModel{
 	Long telephone;
 	String adresse;
 	TypeEtablissementModel typeEtablissement;
+	
+	
 	
 }

@@ -1,23 +1,13 @@
 package com.abouna.zekouli_ui.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
 
-import com.abouna.zekouli_ui.configs.BOConfig;
+import com.abouna.zekouli_ui.data.models.AbstractModel;
 
-
-public class AbstractService {
-	@Autowired
-	private BOConfig boConfig;
+public abstract class AbstractService<T extends AbstractModel,ID extends Object>{
 	
-	public String getSchema() {
-		return boConfig.getSchema();
-	}
-	
-	public String getUrl() {
-		return boConfig.getUrl();
-	}
-	
-	public String getPort() {
-		return boConfig.getPort();
-	}
+	protected abstract T enregistrerOuModifier(T t);
+	protected abstract List<T> getListe();
+	protected abstract T obtenirParId(ID id);
+	protected abstract void supprimer(ID id);
 }

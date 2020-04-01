@@ -16,66 +16,77 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
-import nz.net.ultraq.thymeleaf.LayoutDialect;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
+import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 /**
  *
  * @author abouna
  */
 @Configuration
-public class ZekouliUIConfig implements  WebMvcConfigurer {
-	 @Bean
-	    @Description("Thymeleaf template resolver serving HTML 5")
-	    public ClassLoaderTemplateResolver templateResolver() {
+public class ZekouliUIConfig implements WebMvcConfigurer {
+	@Bean
+	@Description("Thymeleaf template resolver serving HTML 5")
+	public ClassLoaderTemplateResolver templateResolver() {
 
-	    	ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+		ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
 
-	        templateResolver.setPrefix("templates/");
-	        templateResolver.setCacheable(false);
-	        templateResolver.setSuffix(".html");
-	        templateResolver.setTemplateMode("HTML");
-	        templateResolver.setCharacterEncoding("UTF-8");
+		templateResolver.setPrefix("templates/");
+		templateResolver.setCacheable(false);
+		templateResolver.setSuffix(".html");
+		templateResolver.setTemplateMode("HTML");
+		templateResolver.setCharacterEncoding("UTF-8");
 
-	        return templateResolver;
-	    }
+		return templateResolver;
+	}
 
-	    @Bean
-	    @Description("Thymeleaf template engine with Spring integration")
-	    public SpringTemplateEngine templateEngine() {
+	@Bean
+	@Description("Thymeleaf template engine with Spring integration")
+	public SpringTemplateEngine templateEngine() {
 
-	    	SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-	        templateEngine.setTemplateResolver(templateResolver());
-	        templateEngine.addDialect(new LayoutDialect());
-	        return templateEngine;
-	    }
+		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+		templateEngine.setTemplateResolver(templateResolver());
+		templateEngine.addDialect(new LayoutDialect());
+		return templateEngine;
+	}
 
-	    @Bean
-	    @Description("Thymeleaf view resolver")
-	    public ViewResolver viewResolver() {
+	@Bean
+	@Description("Thymeleaf view resolver")
+	public ViewResolver viewResolver() {
 
-	    	ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+		ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
 
-	        viewResolver.setTemplateEngine(templateEngine());
-	        viewResolver.setCharacterEncoding("UTF-8");
+		viewResolver.setTemplateEngine(templateEngine());
+		viewResolver.setCharacterEncoding("UTF-8");
 
-	        return viewResolver;
-	    }
-	    
-	    @Bean
-	    public LocaleChangeInterceptor localeChangeInterceptor() {
-	        LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
-	        lci.setParamName("lang");
-	        return lci;
-	    }
+		return viewResolver;
+	}
 
-	    @Override
-	    public void addInterceptors(InterceptorRegistry registry) {
-	        registry.addInterceptor(localeChangeInterceptor());
-	    }
+	@Bean
+	public LocaleChangeInterceptor localeChangeInterceptor() {
+		LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
+		lci.setParamName("lang");
+		return lci;
+	}
 
-	    /*@Override
-	    public void addViewControllers(ViewControllerRegistry registry) {
-	        registry.addViewController("/").setViewName("home");
-	    }*/
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(localeChangeInterceptor());
+	}
+
+	/*
+	 * @Override public void addViewControllers(ViewControllerRegistry registry) {
+	 * registry.addViewController("/").setViewName("home"); }
+	 */
+
+	@Bean
+	public ObjectMapper serializingObjectMapper() {
+		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+		objectMapper.registerModule(new JavaTimeModule());
+		return objectMapper;
+	}
 }

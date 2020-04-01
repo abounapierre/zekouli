@@ -1,7 +1,5 @@
 package com.abouna.zekouli_ui.data.models;
 
-import java.io.Serializable;
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -16,9 +14,9 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(of= {"libelle","code"})
-@ToString(of= {"libelle","code"})
-public class ClasseModel implements Serializable{
+@EqualsAndHashCode(callSuper=false,of= {"libelle","code"})
+@ToString(callSuper=true,of= {"libelle","code"})
+public class ClasseModel extends AbstractModel{
 	/**
 	 * 
 	 */

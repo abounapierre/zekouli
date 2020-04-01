@@ -15,7 +15,7 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper=false,of= {"libelle","code"})
-@ToString(of= {"libelle","code"})
+@ToString(callSuper=true,of= {"libelle","code"})
 public class SerieModel extends AbstractModel{
 	/**
 	 * serial number.

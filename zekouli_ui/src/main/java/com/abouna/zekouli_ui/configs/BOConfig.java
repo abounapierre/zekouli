@@ -29,5 +29,7 @@ public class BOConfig {
 		this.port = port;
 	}
 	
-	
+	public String getUrlComplete() {
+		return getSchema().concat("://").concat(getUrl()).concat(":").concat(getPort()).concat("/");
+	}
 }
