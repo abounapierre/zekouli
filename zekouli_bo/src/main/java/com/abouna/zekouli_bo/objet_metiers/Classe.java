@@ -1,5 +1,6 @@
 package com.abouna.zekouli_bo.objet_metiers;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -20,26 +21,25 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper=false,of= {"libelle","code","etablissement"})
-@ToString(of= {"libelle","code"})
+@EqualsAndHashCode(callSuper=false,of= {"libelle","code","serie","niveau","cycle"})
+@ToString(callSuper=true,of= {"libelle","code","serie","niveau","cycle"})
 public class Classe extends ObjetMetier{
 	/**
 	 * s version.
 	 */
 	static final long serialVersionUID = 6608513388037821077L;
+	@Column(nullable = false)
 	String libelle;
+	@Column(nullable = false)
 	String code;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_etablissement")
-	Etablissement etablissement;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_cycle")
+	@JoinColumn(name = "id_cycle",nullable = false)
 	Cycle cycle;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_niveau")
+	@JoinColumn(name = "id_niveau",nullable = false)
 	Niveau niveau;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_serie")
+	@JoinColumn(name = "id_serie",nullable = true)
 	Serie serie;
 
 }

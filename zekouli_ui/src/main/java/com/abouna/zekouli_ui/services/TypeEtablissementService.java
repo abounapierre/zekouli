@@ -29,7 +29,7 @@ public class TypeEtablissementService extends AbstractService<TypeEtablissementM
 		if(t.getId() == null) {
 			return proxy.enregistrer(t);
 		}
-		return proxy.modifier(t);
+		return proxy.modifier(t,t.getId());
 	}
 
 	@Override

@@ -11,9 +11,10 @@ import com.abouna.zekouli_ui.configs.BOConfig;
 import com.abouna.zekouli_ui.configs.FeignConfig;
 import com.abouna.zekouli_ui.data.models.ClasseModel;
 import com.abouna.zekouli_ui.services.proxy.ClasseProxy;
+import com.abouna.zekouli_ui.vue.dto.ClasseForm;
 
 @Component
-public class ClasseService extends AbstractService<ClasseModel, Long>{
+public class ClasseService extends AbstractService<ClasseModel, Long> {
 	@Autowired
 	private BOConfig boConfig;
 
@@ -26,10 +27,10 @@ public class ClasseService extends AbstractService<ClasseModel, Long>{
 
 	@Override
 	public ClasseModel enregistrerOuModifier(ClasseModel t) {
-		if(t.getId() == null) {
+		if (t.getId() == null) {
 			return proxy.enregistrer(t);
 		}
-		return proxy.modifier(t);
+		return proxy.modifier(t, t.getId());
 	}
 
 	@Override
@@ -44,6 +45,44 @@ public class ClasseService extends AbstractService<ClasseModel, Long>{
 
 	@Override
 	public void supprimer(Long id) {
-	proxy.supprimer(id);
+		proxy.supprimer(id);
 	}
+
+	public ClasseForm enregistrerOuModifier(ClasseForm t) {
+		ClasseForm form = new ClasseForm();
+		ClasseModel model = null;
+		if (t.getId() == null) {
+			model = proxy.enregistrer((ClasseModel) t);
+			form = (ClasseForm) t;
+			form.setEtablissement(t.getNiveau().getEtablissement());
+			return form;
+		} else {
+			model = proxy.modifier((ClasseModel) t, t.getId());
+			if (model != null) {
+				form = convertirEnClasseForm(model);
+				form.setEtablissement(model.getNiveau().getEtablissement());
+				return form;
+			}
+		}
+		return null;
+	}
+
+	public ClasseForm convertirEnClasseForm(ClasseModel model) {
+		if (model != null) {
+			ClasseForm form = new ClasseForm();
+			form.setCode(model.getCode());
+			form.setCycle(model.getCycle());
+			form.setDateCreation(model.getDateCreation());
+			form.setDateModification(model.getDateModification());
+			form.setEtablissement(model.getCycle().getEtablissement());
+			form.setId(model.getId());
+			form.setLibelle(model.getLibelle());
+			form.setNiveau(model.getNiveau());
+			form.setSerie(model.getSerie());
+			form.setUtilisateur(model.getUtilisateur());
+			return form;
+		}
+		return null;
+	}
+
 }

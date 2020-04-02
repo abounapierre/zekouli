@@ -82,11 +82,11 @@ public class ZekouliUIConfig implements WebMvcConfigurer {
 	 * registry.addViewController("/").setViewName("home"); }
 	 */
 
-	@Bean
+	/*@Bean
 	public ObjectMapper serializingObjectMapper() {
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 		objectMapper.registerModule(new JavaTimeModule());
 		return objectMapper;
-	}
+	}*/
 }

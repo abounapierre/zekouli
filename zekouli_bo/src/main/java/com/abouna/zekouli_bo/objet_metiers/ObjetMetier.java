@@ -1,7 +1,6 @@
 package com.abouna.zekouli_bo.objet_metiers;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -9,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -34,8 +35,10 @@ public abstract class ObjetMetier implements Serializable{
 	@Column(name = "utilisateur")
 	String utilisateur;
 	@Column(name = "date_creation")
-	protected LocalDate dateCreation;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+	protected LocalDateTime dateCreation;
 	@Column(name = "date_modification")
-	protected LocalDate dateModification;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+	protected LocalDateTime dateModification;
 	
 }

@@ -23,5 +23,7 @@ public class NiveauModel extends AbstractModel{
 	static final long serialVersionUID = -6917561774096989422L;
 	String libelle;
 	String code;
+	EtablissementModel etablissement;
+	CycleModel cycle;
 
 }

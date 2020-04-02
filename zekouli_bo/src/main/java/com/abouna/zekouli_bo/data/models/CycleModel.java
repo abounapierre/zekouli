@@ -23,5 +23,6 @@ public class CycleModel extends AbstractModel{
 	static final long serialVersionUID = -5688558945088143316L;
 	String libelle;
 	String code;
+	EtablissementModel etablissement;
 
 }

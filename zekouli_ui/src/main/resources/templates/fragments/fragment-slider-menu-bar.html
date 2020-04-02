@@ -6,13 +6,15 @@
             </li>
             <li><a><i class="fa fa-edit"></i> <span data-th-text="#{application_menu_parametere}"></span> <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                    <li><a href="/etablissement"><span data-th-text="#{application_menu_parametere_etablissement}"></span></a></li>
-                    <li><a href="/section"><span data-th-text="#{application_menu_parametere_section}"></span></a></li>
-                    <li><a href="/cycle"><span data-th-text="#{application_menu_parametere_cycle}"></span></a></li>
-                    <li><a href="/classe"><span data-th-text="#{application_menu_parametere_classe}"></span></a></li>                                                
-                    <li><a href="/session"><span data-th-text="#{application_menu_parametere_session}"></span></a></li>                
-                    <li><a href="/annee-scolaire"><span data-th-text="#{application_menu_parametere_annee-scolaire}"></span></a></li>
-                    <li><a href="/trimestre"><span data-th-text="#{application_menu_parametere_trimestre}"></span></a></li>                  
+                 	<li><a data-th-href="@{/type-etablissement}"><span data-th-text="#{application_menu_parametere_type_etablissement}"></span></a></li>
+                    <li><a data-th-href="@{/etablissement}"><span data-th-text="#{application_menu_parametere_etablissement}"></span></a></li>                    
+                    <li><a data-th-href="@{/cycle}"><span data-th-text="#{application_menu_parametere_cycle}"></span></a></li>
+                    <li><a data-th-href="@{/niveau}"><span data-th-text="#{application_menu_parametere_niveau}"></span></a></li>
+                     <li><a data-th-href="@{/serie}"><span data-th-text="#{application_menu_parametere_serie}"></span></a></li>
+                    <li><a data-th-href="@{/classe}"><span data-th-text="#{application_menu_parametere_classe}"></span></a></li>                                                
+                    <li><a data-th-href="@{/session}"><span data-th-text="#{application_menu_parametere_session}"></span></a></li>                
+                    <li><a data-th-href="@{/annee-scolaire}"><span data-th-text="#{application_menu_parametere_annee-scolaire}"></span></a></li>
+                    <li><a data-th-href="@{/trimestre}"><span data-th-text="#{application_menu_parametere_trimestre}"></span></a></li>                  
                 </ul>
             </li>
             <li><a><i class="fa fa-desktop"></i> <span data-th-text="#{application_menu_student}"></span> <span class="fa fa-chevron-down"></span></a>

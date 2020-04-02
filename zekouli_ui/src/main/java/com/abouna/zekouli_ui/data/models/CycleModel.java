@@ -14,8 +14,8 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper=false,of= {"libelle","code"})
-@ToString(callSuper=true,of= {"libelle","code"})
+@EqualsAndHashCode(callSuper=false,of= {"libelle","code","etablissement"})
+@ToString(callSuper=true,of= {"libelle","code","etablissement"})
 public class CycleModel extends AbstractModel{
 	/**
 	 * 
@@ -23,5 +23,6 @@ public class CycleModel extends AbstractModel{
 	static final long serialVersionUID = -5688558945088143316L;
 	String libelle;
 	String code;
+	EtablissementModel etablissement;
 
 }

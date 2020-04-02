@@ -18,9 +18,9 @@ public interface AbstractProxy<T extends AbstractModel,ID extends Object> {
     @Headers("Content-Type: application/json")
     T enregistrer(T t);
     
-    @RequestLine("PUT")
+    @RequestLine("PUT /{id}")
     @Headers("Content-Type: application/json")
-    T modifier(T t);
+    T modifier(T t,@Param("id") ID id);
     
     @RequestLine("DELETE /{id}")
     void supprimer(@Param("id") ID id);

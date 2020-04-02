@@ -32,7 +32,7 @@ public class TypeEtablissement extends ObjetMetier {
 	static final long serialVersionUID = 8767542948297640288L;
 	String libelle;
 	String code;
-	@OneToMany(mappedBy = "typeEtablissement", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "typeEtablissement")//, cascade = CascadeType.ALL, orphanRemoval = true
 	List<Etablissement> etablissements = new ArrayList<>();
 
 	public void ajouter(Etablissement etablissement) {

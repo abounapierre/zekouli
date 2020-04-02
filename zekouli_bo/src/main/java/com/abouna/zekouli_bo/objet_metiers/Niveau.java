@@ -3,8 +3,9 @@ package com.abouna.zekouli_bo.objet_metiers;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import lombok.AccessLevel;
@@ -22,8 +23,8 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper=false,of= {"libelle","code"})
-@ToString(of= {"libelle","code"})
+@EqualsAndHashCode(callSuper=false,of= {"libelle","code","etablissement"})
+@ToString(of= {"libelle","code","etablissement"})
 public class Niveau extends ObjetMetier{
 
 	/**
@@ -32,8 +33,14 @@ public class Niveau extends ObjetMetier{
 	static final long serialVersionUID = 2652385460101592830L;
 	String libelle;
 	String code;
-	@OneToMany(mappedBy = "niveau", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "niveau")
 	List<Classe> classes = new ArrayList<Classe>();
+	@ManyToOne
+	@JoinColumn(name = "id_etablissement")
+	Etablissement etablissement;
+	@ManyToOne
+	@JoinColumn(name = "id_cycle")
+	Cycle cycle;
 	
 	public void ajouter(Classe classe) {
 		classes.add(classe);

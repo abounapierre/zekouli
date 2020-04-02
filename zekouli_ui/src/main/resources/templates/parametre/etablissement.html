@@ -29,7 +29,8 @@
 												data-th-text="#{application_parametre_etablissement_form_libelle}"></span></label>
 											<input type="text" class="form-control" id="nom"
 												th:field="*{libelle}" />
-											<p class="text-danger" th:if="${#fields.hasErrors('libelle')}"
+											<p class="text-danger"
+												th:if="${#fields.hasErrors('libelle')}"
 												th:errors="*{libelle}"></p>
 										</div>
 										<div class="form-group col-md-6">
@@ -94,6 +95,7 @@
 										th:href="@{/etablissement/annuler}"
 										class="btn btn-warning btn-annuler"></a>
 								</div>
+								<input type="hidden" th:field="*{id}" id="id" />
 							</form>
 						</div>
 					</div>
@@ -120,10 +122,10 @@
 							<td th:text="${etablissement.telephone}" class="col-xs-1"></td>
 							<td th:text="${etablissement.email}" class="col-xs-2"></td>
 							<td th:text="${etablissement.site}" class="col-xs-2"></td>
-							<td th:text="${etablissement.typeEtablissement.libelle}"
+							<td th:text="${etablissement.typeEtablissement.code}"
 								class="col-xs-2"></td>
 							<td class="col-xs-2"><button
-									th:attr="data-target=|#myModal${etablissement.code}|"
+									th:attr="data-target=|#myModal${etablissement.id}|"
 									class="btn btn_table btn_table_suppr" data-toggle="modal">
 									<i class="fa fa-trash"></i>
 								</button> <a
@@ -147,7 +149,7 @@
 												<button type="button" class="btn btn-danger"
 													data-dismiss="modal">[[#{application_maodal_boutton_fermer}]]</button>
 												<a
-													th:href="@{/etablissement/supprimer/{code}(code=${etablissement.id})}"
+													th:href="@{/etablissement/supprimer/{id}(id=${etablissement.id})}"
 													class="btn btn-success">[[#{application_maodal_boutton_valider}]]</a>
 											</div>
 										</div>

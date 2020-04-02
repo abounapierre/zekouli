@@ -3,8 +3,10 @@ package com.abouna.zekouli_bo.objet_metiers;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import lombok.AccessLevel;
@@ -29,10 +31,17 @@ public class Cycle extends ObjetMetier{
 	 * 
 	 */
 	static final long serialVersionUID = 5658669356935350070L;
+	@Column(nullable = false)
 	String libelle;
+	@Column(nullable = false)
 	String code;
-	@OneToMany(mappedBy = "cycle", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "cycle")
 	List<Classe> classes = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name = "id_etablissement",nullable = false)
+	Etablissement etablissement;
+	@OneToMany(mappedBy = "cycle")
+	List<Niveau> niveaux = new ArrayList<>();
 
 	public void ajouter(Classe classe) {
 		classes.add(classe);
@@ -42,5 +51,15 @@ public class Cycle extends ObjetMetier{
 	public void supprimer(Classe classe) {
 		classes.remove(classe);
 		classe.setCycle(null);
+	}
+	
+	public void ajouter(Niveau o) {
+		niveaux.add(o);
+		o.setCycle(this);
+	}
+
+	public void supprimer(Niveau o) {
+		niveaux.remove(o);
+		o.setCycle(null);
 	}
 }

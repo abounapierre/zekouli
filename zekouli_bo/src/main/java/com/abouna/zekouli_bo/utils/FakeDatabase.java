@@ -1,6 +1,7 @@
 package com.abouna.zekouli_bo.utils;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +15,9 @@ import org.springframework.stereotype.Component;
 import com.abouna.zekouli_bo.data.models.EtablissementModel;
 import com.abouna.zekouli_bo.data.models.TypeEtablissementModel;
 import com.abouna.zekouli_bo.mappers.TypeEtablissementMapper;
+import com.abouna.zekouli_bo.objet_metiers.Cycle;
 import com.abouna.zekouli_bo.objet_metiers.Etablissement;
+import com.abouna.zekouli_bo.repositories.CycleDao;
 import com.abouna.zekouli_bo.repositories.EtablissementDao;
 import com.abouna.zekouli_bo.repositories.TypeEtablissementDao;
 
@@ -27,6 +30,8 @@ public class FakeDatabase {
 	private TypeEtablissementMapper mapper= Mappers.getMapper(TypeEtablissementMapper.class);
 	private List<EtablissementModel> etablissements;
 	private List<TypeEtablissementModel> typeEtablissements;
+	@Autowired
+	private CycleDao cycleDao;
 
 	public List<EtablissementModel> getEtablissements() {
 		return etablissements;
@@ -48,15 +53,15 @@ public class FakeDatabase {
 	public void init() {		
 		typeEtablissements = new ArrayList<>();
 		TypeEtablissementModel t = new TypeEtablissementModel("Lycee d'enseignement general","LYGEN");
-		t.setDateCreation(LocalDate.now());
+		t.setDateCreation(LocalDateTime.now());
 		t.setId(1L);
-		t.setDateModification(LocalDate.now());
+		t.setDateModification(LocalDateTime.now());
 		typeEtablissementDao.save(mapper.destinationToSource(t));
 		typeEtablissements.add(t);
 		t = new TypeEtablissementModel("Lycee d'enseignement technique","LYTECH");
-		t.setDateCreation(LocalDate.now());
+		t.setDateCreation(LocalDateTime.now());
 		t.setId(2L);
-		t.setDateModification(LocalDate.now());
+		t.setDateModification(LocalDateTime.now());
 		typeEtablissements.add(t);
 		
 		typeEtablissementDao.save(mapper.destinationToSource(t));
@@ -70,10 +75,15 @@ public class FakeDatabase {
 			e.setId(Long.valueOf(i));
 			etablissements.add(e);
 		}
-		Optional<Etablissement> e = etablissementDao.findById(3L);
+		/*Optional<Etablissement> e = etablissementDao.findById(3L);
 		if(e.isPresent()) {
 			etablissementDao.deleteById(e.get().getId());
 		}
+		
+		Optional<Cycle> cy = cycleDao.findById(6L);
+		if(cy.isPresent()) {
+			cycleDao.deleteById(6L);
+		}*/
 	}
 
 	public EtablissementModel findByIde(Long id) {

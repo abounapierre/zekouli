@@ -6,20 +6,21 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="ctx" th:content="${#httpServletRequest.getContextPath()}" />
 
     <title data-layout-title-pattern="$LAYOUT_TITLE"></title>
 
     <!-- Bootstrap -->
-    <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="/webjars/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link th:href="@{/webjars/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
     <!-- NProgress -->
-    <link href="/webjars/nprogress/nprogress.css" rel="stylesheet">
+    <link th:href="@{/webjars/nprogress/nprogress.css}" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="/css/custom.min.css" rel="stylesheet">
+    <link th:href="@{/css/custom.min.css}" rel="stylesheet">
     <!-- Custom Theme Style 2-->
-    <link href="/css/custom-style.css" rel="stylesheet">
+    <link th:href="@{/css/custom-style.css}" rel="stylesheet">
   </head>
 
   <body class="nav-md">
@@ -87,5 +88,7 @@
     
     <!-- Custom Theme Scripts -->
     <script th:src="@{/js/custom.min.js}"></script>
+    <script th:src="@{/js/global.js}"></script>
+    <th:block layout:fragment="script"></th:block>
   </body>
 </html>

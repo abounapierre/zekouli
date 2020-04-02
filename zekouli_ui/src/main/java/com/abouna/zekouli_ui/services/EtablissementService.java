@@ -27,7 +27,7 @@ public class EtablissementService extends AbstractService<EtablissementModel, Lo
 	@Override
 	public EtablissementModel enregistrerOuModifier(EtablissementModel t) {
 		if (t.getId() != null) {
-			return proxy.modifier(t);
+			return proxy.modifier(t,t.getId());
 		}
 		return proxy.enregistrer(t);
 	}

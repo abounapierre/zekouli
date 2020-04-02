@@ -1,10 +1,13 @@
 package com.abouna.zekouli_ui.data.models;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,18 +16,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 
-/*@JsonTypeInfo(
-		  use = JsonTypeInfo.Id.NAME, 
-		  include = JsonTypeInfo.As.PROPERTY, 
-		  property = "type")
-		@JsonSubTypes({ 
-		  @Type(value = ClasseModel.class, name = "classeModel"), 
-		  @Type(value = CycleModel.class, name = "truck"),
-		  @Type(value = EtablissementModel.class, name = "etablissementModel"),
-		  @Type(value = NiveauModel.class, name = "niveauModel"),
-		  @Type(value = SerieModel.class, name = "serieModel"),
-		  @Type(value = TypeEtablissementModel.class, name = "typeEtablissementModel")
-		})*/
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -37,8 +28,14 @@ public class AbstractModel implements Serializable{
 	private static final long serialVersionUID = 1155609287296958207L;
 	protected Long id;
 	protected String utilisateur;
-	protected String dateCreation;
-	protected String dateModification;
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+	protected LocalDateTime dateCreation;
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
+	@JsonSerialize(using = LocalDateTimeSerializer.class)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+	protected LocalDateTime dateModification;
 	
 	
 }

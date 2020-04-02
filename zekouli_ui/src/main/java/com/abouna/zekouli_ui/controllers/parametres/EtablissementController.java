@@ -40,6 +40,7 @@ public class EtablissementController extends AbstractController {
 			service.enregistrerOuModifier(etablissementModel);
 			model.addAttribute("message", "success");
 		}
+		model.addAttribute("etablissementModel", new EtablissementModel());
 		model.addAttribute("etablissements", service.getListe());
 		model.addAttribute("typeEtablissements", typeService.getListe());
 		return "parametre/etablissement";

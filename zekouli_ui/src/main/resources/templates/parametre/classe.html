@@ -35,29 +35,126 @@
 								</div>
 								<div class="col-xs-6 form-group">
 									<label>[[#{application_parametre_classe_form_etablissement}]]</label>
-									<select id="etablissement" class="form-control">
-										<option value="">--</option>
+									<script th:inline="javascript">
+												/*<![CDATA[*/
+													function getCycles(){
+														var id = /*[[${etablissements}]]*/null;
+														var selectedIndex = $(
+														"#etablissement option:selected")
+														.index();
+														if(selectedIndex!=0){
+																$.ajax({
+																      type : "GET",
+																      url : baseUrl + "ajax/cycles/etablissement/" + id[selectedIndex-1].id,
+																      success: function(result){
+																    	  $('#cycle')
+																    	    .empty()
+																    	    .append('<option></option>');
+																    	  $.each(result, function() {															    		  
+																    		  $("#cycle").append($("<option/>").val(this.id).text(this.libelle));
+																    		});
+																      },
+																      error : function(e) {
+																        console.log("ERROR: ", e);
+																      }
+																  }); 
+																$.ajax({
+																      type : "GET",
+																      url : baseUrl + "ajax/series/etablissement/" + id[selectedIndex-1].id,
+																      success: function(result){
+																    	  $('#serie')
+																    	    .empty()
+																    	    .append('<option></option>');
+																    	  $.each(result, function() {																    		  
+																    		  $("#serie").append($("<option/>").val(this.id).text(this.libelle));
+																    		});
+																      },
+																      error : function(e) {
+																        console.log("ERROR: ", e);
+																      }
+																  });
+																$.ajax({
+																      type : "GET",
+																      url : baseUrl + "ajax/niveaux/etablissement/" + id[selectedIndex-1].id,
+																      success: function(result){
+																    	  $('#niveau')
+																    	    .empty()
+																    	    .append('<option></option>');
+																    	  $.each(result, function() {																    		 
+																    		  $("#niveau").append($("<option/>").val(this.id).text(this.libelle));
+																    		});
+																      },
+																      error : function(e) {
+																        console.log("ERROR: ", e);
+																      }
+																  }); 
+														}else{
+															$('#niveau')
+												    	    .empty()
+												    	    .append('<option></option>');
+															$('#serie')
+												    	    .empty()
+												    	    .append('<option></option>');
+															$('#cycle')
+												    	    .empty()
+												    	    .append('<option></option>');
+														}
+													  }											
+												/*]]>*/
+									</script>
+									<select id="etablissement" class="form-control" th:onchange="'getCycles();'" th:field=" *{etablissement}">
+										<option value=""></option>
 										<option data-th-each="etablissement : ${etablissements}"
 											data-th-value="${etablissement.id}"
-											data-th-utext="${etablissement.nom}" />
+											data-th-utext="${etablissement.libelle}" />
+									</select>
+								</div>
+								<div class="col-xs-6 form-group">
+									<label>[[#{application_parametre_classe_form_cycle}]]</label> 
+									<script th:inline="javascript">
+												/*<![CDATA[*/
+													function getNiveaux(){
+														var selectedIndex = $(
+														"#cycle option:selected")
+														.val();
+														if(selectedIndex!=0){
+																$.ajax({
+																      type : "GET",
+																      url : baseUrl + "ajax/niveaux/cycle/" + selectedIndex,
+																      success: function(result){
+																    	  $('#niveau')
+																    	    .empty()
+																    	    .append('<option></option>');											    	 
+																    	  $.each(result, function() {
+																    		  $("#niveau").append($("<option/>").val(this.id).text(this.libelle));
+																    		});
+																      },
+																      error : function(e) {
+																        console.log("ERROR: ", e);
+																      }
+																  });  
+														}else{
+															$('#niveau')
+												    	    .empty()
+												    	    .append('<option></option>');
+														}
+													  }											
+												/*]]>*/
+									</script>
+									<select
+										id="cycle" class="form-control" th:onchange="'getNiveaux();'" th:field=" *{cycle}">
+										<option value=""></option>
+										<option data-th-each="cycle : ${cycles}"
+											data-th-value="${cycle.id}" data-th-utext="${cycle.libelle}" />
 									</select>
 								</div>
 								<div class="col-xs-6 form-group">
 									<label>[[#{application_parametre_classe_form_niveau}]]</label>
-									<select id="niveau" class="form-control">
+									<select id="niveau" class="form-control" th:field=" *{niveau}">
 										<option value=""></option>
 										<option data-th-each="niveau : ${niveaux}"
-											data-th-value="${niveau.countryId}"
+											data-th-value="${niveau.id}"
 											data-th-utext="${niveau.libelle}" />
-									</select>
-								</div>
-
-								<div class="col-xs-6 form-group">
-									<label>[[#{application_parametre_classe_form_cycle}]]</label> <select
-										id="cycle" class="form-control">
-										<option value=""></option>
-										<option data-th-each="cycle : ${cycles}"
-											data-th-value="${cycle.id}" data-th-utext="${cycle.libelle}" />
 									</select>
 								</div>
 								<div class="col-xs-6 form-group">
@@ -75,10 +172,64 @@
 									th:href="@{/classe/annuler}"
 									class="btn btn-warning btn-annuler"></a>
 							</div>
+							<input type="hidden" th:field="*{id}" id="id" />
 						</form>
 						<!-- fin formulaire -->
 					</div>
 				</div>
+			</div>
+			<div class="x_panel">
+				<table
+					class="table table-sm table-bordered table-striped mb-0 table-fixed">
+					<thead>
+						<tr>
+							<th class="col-xs-2">[[#{application_parametre_classe_form_libelle}]]</th>
+							<th class="col-xs-2">[[#{application_parametre_classe_form_code}]]</th>
+							<th class="col-xs-2">[[#{application_parametre_classe_form_cycle}]]</th>
+							<th class="col-xs-2">[[#{application_parametre_classe_form_niveau}]]</th>
+							<th class="col-xs-2">[[#{application_parametre_classe_form_serie}]]</th>
+							<th class="col-xs-2">[[#{application_parametre_classe_form_action}]]</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="classe : ${classes}">
+							<td th:text="${classe.libelle}" class="col-xs-2"></td>
+							<td th:text="${classe.code}" class="col-xs-2"></td>
+							<td th:text="${classe.cycle.code}" class="col-xs-2"></td>
+							<td th:text="${classe.niveau.code}" class="col-xs-2"></td>
+							<td th:text="${classe.serie != null} ? ${classe.serie.code} : 'null'" class="col-xs-2"></td>
+							<td class="col-xs-2"><button
+									th:attr="data-target=|#myModal${classe.id}|"
+									class="btn btn_table btn_table_suppr" data-toggle="modal">
+									<i class="fa fa-trash"></i>
+								</button> <a th:href="@{/classe/modifier/{id}(id=${classe.id})}"
+								class="btn btn_table btn_table_modif"> <i
+									class="fa fa-pencil"></i>
+							</a> <!-- The Modal -->
+								<div class="modal fade" th:id="|myModal${classe.id}|">
+									<div class="modal-dialog">
+										<div class="modal-content">
+
+											<!-- Modal Header -->
+											<div class="modal-header">
+												<h4 class="modal-title"
+													th:text="|#{application_parametre_serie_table_modal_message} ${classe.libelle}?|"></h4>
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+											</div>
+
+											<!-- Modal footer -->
+											<div class="modal-footer">
+												<button type="button" class="btn btn-danger"
+													data-dismiss="modal">[[#{application_maodal_boutton_fermer}]]</button>
+												<a th:href="@{/classe/supprimer/{id}(id=${classe.id})}"
+													class="btn btn-success">[[#{application_maodal_boutton_valider}]]</a>
+											</div>
+										</div>
+									</div>
+								</div></td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
