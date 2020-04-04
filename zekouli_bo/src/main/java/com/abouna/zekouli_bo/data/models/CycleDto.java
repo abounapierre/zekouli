@@ -16,13 +16,13 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @EqualsAndHashCode(callSuper=false,of= {"libelle","code"})
 @ToString(of= {"libelle","code"})
-public class SerieModel extends AbstractModel{
+public class CycleDto extends AbstractDto{
 	/**
-	 * serial number.
+	 * 
 	 */
-	static final long serialVersionUID = 5775432966551107265L;
+	static final long serialVersionUID = -5688558945088143316L;
 	String libelle;
 	String code;
-	EtablissementModel etablissement;
+	EtablissementDto etablissement;
 
 }

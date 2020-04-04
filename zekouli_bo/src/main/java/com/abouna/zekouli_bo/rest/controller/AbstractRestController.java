@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.abouna.zekouli_bo.data.models.AbstractModel;
+import com.abouna.zekouli_bo.data.models.AbstractDto;
 
-public interface AbstractRestController <R extends AbstractModel, ID extends Object>{
+public interface AbstractRestController <R extends AbstractDto, ID extends Object>{
 	@PostMapping
 	public R enregistrer(@RequestBody R r);
 

@@ -41,7 +41,7 @@ public class Etablissement extends ObjetMetier{
 	@Column(nullable = false)
 	String code;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_type_etablissement",nullable = false)
+	@JoinColumn(name = "id_type_etablissement",nullable = true)
 	TypeEtablissement typeEtablissement;
 	@Email
 	String email;

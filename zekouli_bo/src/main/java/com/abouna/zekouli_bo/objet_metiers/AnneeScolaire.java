@@ -1,7 +1,11 @@
 package com.abouna.zekouli_bo.objet_metiers;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -33,5 +37,9 @@ public class AnneeScolaire extends ObjetMetier{
 	@Column(nullable = false)
 	String code;
 	boolean enCours;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	LocalDate jourDebut;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	LocalDate jourFin;
 
 }

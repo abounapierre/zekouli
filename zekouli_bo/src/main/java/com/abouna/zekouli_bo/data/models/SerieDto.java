@@ -14,15 +14,15 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper=false,of= {"debut","code","fin"})
-@ToString(of= {"debut","code","fin","enCours"})
-public class AnneeScolaireModel extends AbstractModel{
+@EqualsAndHashCode(callSuper=false,of= {"libelle","code"})
+@ToString(of= {"libelle","code"})
+public class SerieDto extends AbstractDto{
 	/**
-	 * 
+	 * serial number.
 	 */
-	static final long serialVersionUID = 1277024681662039495L;
+	static final long serialVersionUID = 5775432966551107265L;
+	String libelle;
 	String code;
-	Long debut;
-	Long fin;
-	boolean enCours;
+	EtablissementDto etablissement;
+
 }

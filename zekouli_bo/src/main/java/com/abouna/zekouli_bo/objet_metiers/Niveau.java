@@ -41,6 +41,8 @@ public class Niveau extends ObjetMetier{
 	@ManyToOne
 	@JoinColumn(name = "id_cycle")
 	Cycle cycle;
+	@OneToMany(mappedBy = "niveau")
+	List<Matiere> matieres = new ArrayList<>();
 	
 	public void ajouter(Classe classe) {
 		classes.add(classe);
@@ -50,6 +52,16 @@ public class Niveau extends ObjetMetier{
 	public void supprimer(Classe classe) {
 		classes.remove(classe);
 		classe.setNiveau(null);
+	}
+	
+	public void ajouter(Matiere matiere) {
+		matieres.add(matiere);
+		matiere.setNiveau(this);
+	}
+
+	public void supprimer(Matiere matiere) {
+		matieres.remove(matiere);
+		matiere.setNiveau(null);
 	}
 
 }

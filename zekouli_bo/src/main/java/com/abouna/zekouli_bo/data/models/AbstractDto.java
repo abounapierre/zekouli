@@ -16,7 +16,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class AbstractModel implements Serializable{
+public class AbstractDto implements Serializable{
 	/**
 	 * serial No.
 	 */

@@ -33,10 +33,10 @@ public class Classe extends ObjetMetier{
 	@Column(nullable = false)
 	String code;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_cycle",nullable = false)
+	@JoinColumn(name = "id_cycle",nullable = true)
 	Cycle cycle;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_niveau",nullable = false)
+	@JoinColumn(name = "id_niveau",nullable = true)
 	Niveau niveau;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_serie",nullable = true)

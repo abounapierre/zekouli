@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
@@ -30,7 +31,9 @@ public class TypeEtablissement extends ObjetMetier {
 	 * 
 	 */
 	static final long serialVersionUID = 8767542948297640288L;
+	@Column(nullable = false)
 	String libelle;
+	@Column(nullable = false)
 	String code;
 	@OneToMany(mappedBy = "typeEtablissement")//, cascade = CascadeType.ALL, orphanRemoval = true
 	List<Etablissement> etablissements = new ArrayList<>();
