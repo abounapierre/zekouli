@@ -2,12 +2,13 @@ package com.abouna.zekouli_ui.services.proxy;
 
 import java.util.List;
 
-import com.abouna.zekouli_ui.data.models.AbstractModel;
+import com.abouna.zekouli_ui.data.dtos.AbstractDto;
+
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
 
-public interface AbstractProxy<T extends AbstractModel,ID extends Object> {
+public interface AbstractProxy<T extends AbstractDto,ID extends Object> {
 	@RequestLine("GET /{id}")
     T getParId(@Param("id") ID id);
  

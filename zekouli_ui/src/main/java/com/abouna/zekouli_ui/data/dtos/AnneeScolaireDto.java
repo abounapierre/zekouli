@@ -1,4 +1,13 @@
-package com.abouna.zekouli_ui.data.models;
+package com.abouna.zekouli_ui.data.dtos;
+
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -16,7 +25,7 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @EqualsAndHashCode(callSuper=false,of= {"debut","code","fin"})
 @ToString(of= {"debut","code","fin","enCours"})
-public class AnneeScolaireModel extends AbstractModel{
+public class AnneeScolaireDto extends AbstractDto{
 	/**
 	 * 
 	 */
@@ -25,4 +34,12 @@ public class AnneeScolaireModel extends AbstractModel{
 	Long debut;
 	Long fin;
 	boolean enCours;
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	LocalDate jourDebut;
+	@JsonDeserialize(using = LocalDateDeserializer.class)
+	@JsonSerialize(using = LocalDateSerializer.class)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	LocalDate jourFin;
 }

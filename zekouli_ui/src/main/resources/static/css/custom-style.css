@@ -72,3 +72,15 @@ img {
     max-height: auto;
     float: left;
 }
+
+.texte-message{
+	color: red;
+}
+
+.texte-message-ok{
+	color: green;
+}
+
+.texte-message-avertissement{
+	color: orange;
+}

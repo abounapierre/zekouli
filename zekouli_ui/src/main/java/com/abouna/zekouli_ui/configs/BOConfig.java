@@ -2,7 +2,11 @@ package com.abouna.zekouli_ui.configs;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-
+/**
+ * 
+ * @author abouna
+ *
+ */
 @Configuration
 @ConfigurationProperties(prefix = "application.zekouli.bo")
 public class BOConfig {

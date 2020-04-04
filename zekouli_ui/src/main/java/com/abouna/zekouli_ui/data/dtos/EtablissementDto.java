@@ -1,4 +1,4 @@
-package com.abouna.zekouli_ui.data.models;
+package com.abouna.zekouli_ui.data.dtos;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -19,7 +19,7 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @EqualsAndHashCode(callSuper=false,of= {"libelle","code"})
 @ToString(callSuper=true,of= {"libelle","code","email","site"})
-public class EtablissementModel extends AbstractModel{
+public class EtablissementDto extends AbstractDto{
 	/**
 	 * serial number.
 	 */
@@ -34,7 +34,7 @@ public class EtablissementModel extends AbstractModel{
 	byte[] logo;
 	Long telephone;
 	String adresse;
-	TypeEtablissementModel typeEtablissement;
+	TypeEtablissementDto typeEtablissement;
 	
 	
 	

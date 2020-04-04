@@ -1,4 +1,4 @@
-package com.abouna.zekouli_ui.data.models;
+package com.abouna.zekouli_ui.data.dtos;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -15,7 +15,7 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @EqualsAndHashCode(callSuper=false,of= {"libelle","code"})
 @ToString(callSuper=true,of= {"libelle","code"})
-public class TypeEtablissementModel extends AbstractModel{
+public class TypeEtablissementDto extends AbstractDto{
 	/**
 	 * 
 	 */

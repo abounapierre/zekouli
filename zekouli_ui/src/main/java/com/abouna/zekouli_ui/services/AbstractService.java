@@ -2,12 +2,11 @@ package com.abouna.zekouli_ui.services;
 
 import java.util.List;
 
-import com.abouna.zekouli_ui.data.models.AbstractModel;
+import com.abouna.zekouli_ui.data.dtos.AbstractDto;
 
-public abstract class AbstractService<T extends AbstractModel,ID extends Object>{
-	
-	protected abstract T enregistrerOuModifier(T t);
-	protected abstract List<T> getListe();
-	protected abstract T obtenirParId(ID id);
-	protected abstract void supprimer(ID id);
+public interface AbstractService<T extends AbstractDto,ID extends Object>{
+	T enregistrerOuModifier(T t,ID id);
+	List<T> getListe();
+	T obtenirParId(ID id);
+	void supprimer(ID id);
 }

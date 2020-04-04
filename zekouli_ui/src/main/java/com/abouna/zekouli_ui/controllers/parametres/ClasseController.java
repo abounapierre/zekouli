@@ -3,6 +3,7 @@ package com.abouna.zekouli_ui.controllers.parametres;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,17 +14,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.abouna.zekouli_ui.controllers.AbstractController;
-import com.abouna.zekouli_ui.data.models.ClasseModel;
+import com.abouna.zekouli_ui.controllers.form.models.ClasseFormModel;
+import com.abouna.zekouli_ui.controllers.form.models.MessageForm;
+import com.abouna.zekouli_ui.data.dtos.ClasseDto;
 import com.abouna.zekouli_ui.services.ClasseService;
 import com.abouna.zekouli_ui.services.CycleService;
 import com.abouna.zekouli_ui.services.EtablissementService;
 import com.abouna.zekouli_ui.services.NiveauService;
 import com.abouna.zekouli_ui.services.SerieService;
-import com.abouna.zekouli_ui.vue.dto.ClasseForm;
 
 @Controller
 @RequestMapping("/classe")
-public class ClasseController extends AbstractController{
+public class ClasseController extends AbstractController<ClasseFormModel>{
 	
 	@Autowired
 	private EtablissementService etService;
@@ -35,23 +37,24 @@ public class ClasseController extends AbstractController{
 	private SerieService serieService;
 	@Autowired
 	private ClasseService classeService;
+	@Autowired
+	private MessageSource messageSource;
 
 	@Override
 	@GetMapping
 	public String getTemplate(Model model) {
-		model.addAttribute("classeModel", new ClasseForm());
+		model.addAttribute("classeModel", new ClasseFormModel());
 		model.addAttribute("etablissements", etService.getListe());
 		model.addAttribute("classes", classeService.getListe());
 		return "parametre/classe";
 	}
 
 	@PostMapping("/enregister")
-	public String enregistre(@ModelAttribute("classeModel") @Valid ClasseForm classeModel,
+	public String enregistre(@ModelAttribute("classeModel") @Valid ClasseFormModel classeModel,
 			BindingResult result, Model model) {
-		if (!result.hasErrors() && classeModel.getCode() != null && classeModel.getLibelle() != null) {
+		if (validerFormulaire(classeModel, model)) {
 			classeService.enregistrerOuModifier(classeModel);
-			model.addAttribute("message", "success");
-			model.addAttribute("classeModel", new ClasseForm());
+			model.addAttribute("classeModel", new ClasseFormModel());
 		}
 		model.addAttribute("classes", classeService.getListe());
 		model.addAttribute("etablissements", etService.getListe());
@@ -60,9 +63,9 @@ public class ClasseController extends AbstractController{
 
 	@GetMapping("/modifier/{id}")
 	public String showUpdateForm(@PathVariable("id") Long id, Model model) {
-		ClasseModel classeModel = classeService.obtenirParId(id);		
+		ClasseDto classeModel = classeService.obtenirParId(id);		
 		if (classeModel != null) {
-			ClasseForm form = classeService.convertirEnClasseForm(classeModel);
+			ClasseFormModel form = classeService.convertirEnClasseForm(classeModel);
 			model.addAttribute("classeModel", form);
 			model.addAttribute("cycles", cycleService.getListeParEtablissement(form.getEtablissement().getId()));
 			model.addAttribute("niveaux", niveauService.getListeParEtablissement(form.getEtablissement().getId()));
@@ -77,17 +80,29 @@ public class ClasseController extends AbstractController{
 	public String supprimer(@PathVariable("id") Long id, Model model) {
 		classeService.supprimer(id);
 		model.addAttribute("classes", classeService.getListe());
-		model.addAttribute("classeModel", new ClasseForm());
+		model.addAttribute("classeModel", new ClasseFormModel());
 		model.addAttribute("etablissements", etService.getListe());
 		return "parametre/classe";
 	}
 
 	@GetMapping("/annuler")
 	public String initialiserFormulaire(Model model) {
-		model.addAttribute("classeModel", new ClasseForm());
+		model.addAttribute("classeModel", new ClasseFormModel());
 		model.addAttribute("classes", classeService.getListe());
 		model.addAttribute("etablissements", etService.getListe());
 		return "parametre/classe";
+	}
+
+	@Override
+	protected boolean validerFormulaire(ClasseFormModel dto, Model model) {
+		if(dto.getCode()==null || dto.getCode().isEmpty() || dto.getNiveau()==null || dto.getLibelle() == null || dto.getLibelle().isEmpty()
+				|| dto.getCycle() == null) {
+			model.addAttribute("messageModel", new MessageForm(messageSource.getMessage("application_parametre_classe_message_erreur", null, null), "error"));
+			return false;
+		}else {
+			model.addAttribute("messageModel", new MessageForm(messageSource.getMessage("application_parametre_classe_message_ok", null, null), "success"));
+			return true;
+		}	
 	}
 	
 	

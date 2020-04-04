@@ -1,4 +1,4 @@
-package com.abouna.zekouli_ui.data.models;
+package com.abouna.zekouli_ui.data.dtos;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -21,7 +21,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString(callSuper=true,of= {"id","utilisateur","dateCreation","dateModification"})
-public class AbstractModel implements Serializable{
+public class AbstractDto implements Serializable{
 	/**
 	 * serial No.
 	 */

@@ -1,4 +1,4 @@
-package com.abouna.zekouli_ui.data.models;
+package com.abouna.zekouli_ui.data.dtos;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -16,14 +16,14 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @EqualsAndHashCode(callSuper=false,of= {"libelle","code","cycle"})
 @ToString(callSuper=true,of= {"libelle","code","cycle"})
-public class NiveauModel extends AbstractModel{
+public class NiveauDto extends AbstractDto{
 	/**
 	 * serial number.
 	 */
 	static final long serialVersionUID = -6917561774096989422L;
 	String libelle;
 	String code;
-	EtablissementModel etablissement;
-	CycleModel cycle;
+	EtablissementDto etablissement;
+	CycleDto cycle;
 
 }

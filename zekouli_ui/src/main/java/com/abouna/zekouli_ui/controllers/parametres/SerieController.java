@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.abouna.zekouli_ui.controllers.AbstractController;
-import com.abouna.zekouli_ui.data.models.CycleModel;
-import com.abouna.zekouli_ui.data.models.SerieModel;
+import com.abouna.zekouli_ui.data.dtos.CycleDto;
+import com.abouna.zekouli_ui.data.dtos.SerieDto;
 import com.abouna.zekouli_ui.services.EtablissementService;
 import com.abouna.zekouli_ui.services.SerieService;
 
 @Controller
 @RequestMapping("/serie")
-public class SerieController extends AbstractController{
+public class SerieController extends AbstractController<SerieDto>{
 
 	@Autowired
 	private SerieService service;
@@ -31,18 +31,17 @@ public class SerieController extends AbstractController{
 	@GetMapping
 	public String getTemplate(Model model) {
 		model.addAttribute("series", service.getListe());
-		model.addAttribute("serieModel", new CycleModel());
+		model.addAttribute("serieModel", new CycleDto());
 		model.addAttribute("etablissements", etService.getListe());
 		return "parametre/serie";
 	}
 
 	@PostMapping("/enregister")
-	public String enregistre(@ModelAttribute("serieModel") @Valid SerieModel serieModel,
+	public String enregistre(@ModelAttribute("serieModel") @Valid SerieDto serieModel,
 			BindingResult result, Model model) {
 		if (!result.hasErrors() && serieModel.getCode() != null && serieModel.getLibelle() != null) {
-			service.enregistrerOuModifier(serieModel);
-			model.addAttribute("message", "success");
-			model.addAttribute("serieModel", new SerieModel());
+			service.enregistrerOuModifier(serieModel,serieModel.getId());
+			model.addAttribute("serieModel", new SerieDto());
 		}
 		model.addAttribute("series", service.getListe());
 		model.addAttribute("etablissements", etService.getListe());
@@ -51,7 +50,7 @@ public class SerieController extends AbstractController{
 
 	@GetMapping("/modifier/{id}")
 	public String showUpdateForm(@PathVariable("id") Long id, Model model) {
-		SerieModel serieModel = service.obtenirParId(id);
+		SerieDto serieModel = service.obtenirParId(id);
 		if (serieModel != null) {
 			model.addAttribute("serieModel", serieModel);
 		}
@@ -64,16 +63,22 @@ public class SerieController extends AbstractController{
 	public String supprimer(@PathVariable("id") Long id, Model model) {
 		service.supprimer(id);
 		model.addAttribute("series", service.getListe());
-		model.addAttribute("serieModel", new SerieModel());
+		model.addAttribute("serieModel", new SerieDto());
 		model.addAttribute("etablissements", etService.getListe());
 		return "parametre/serie";
 	}
 
 	@GetMapping("/annuler")
 	public String initialiserFormulaire(Model model) {
-		model.addAttribute("serieModel", new SerieModel());
+		model.addAttribute("serieModel", new SerieDto());
 		model.addAttribute("series", service.getListe());
 		model.addAttribute("etablissements", etService.getListe());
 		return "parametre/serie";
+	}
+
+	@Override
+	protected boolean validerFormulaire(SerieDto dto, Model model) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

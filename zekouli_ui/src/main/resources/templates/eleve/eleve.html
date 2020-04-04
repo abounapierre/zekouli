@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.w3.org/1999/xhtml"
+	data-layout-decorate="~{fragments/layout}">
+<head>
+<title>[[#{application_parametre_annee_scolaire_page_titre}]]</title>
+ <link th:href="@{/css/eleve.css}" rel="stylesheet">
+</head>
+
+<body>
+	<!-- page content -->
+	<div class="right_col" role="main" data-layout-fragment="content">
+		<div class="">
+			<div class="page-title">
+				<div class="title_left">
+					<h3>
+						<span
+							data-th-text="#{application_parametre_annee_scolaire_form_titre}"></span>
+					</h3>
+				</div>
+			</div>
+
+			<div class="clearfix"></div>
+
+			<div class="row">
+				<div class="x_panel">
+					<div class="x_content">
+						<div class="container">
+
+							<!-- Nav tabs -->
+							<ul class="nav nav-tabs" role="tablist">
+								<li class="active"><a href="#home" role="tab"
+									data-toggle="tab"> <icon class="fa fa-home"></icon> Home
+								</a></li>
+								<li><a href="#profile" role="tab" data-toggle="tab"> <i
+										class="fa fa-user"></i> Profile
+								</a></li>
+								<li><a href="#messages" role="tab" data-toggle="tab"> <i
+										class="fa fa-envelope"></i> Messages
+								</a></li>
+								<li><a href="#settings" role="tab" data-toggle="tab"> <i
+										class="fa fa-cog"></i> Settings
+								</a></li>
+							</ul>
+
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div class="tab-pane fade active in" id="home">
+									<h2>Home Content Goes Here</h2>
+									<img src="http://lorempixel.com/400/400/cats/1" alt="Cats" />
+								</div>
+								<div class="tab-pane fade" id="profile">
+									<h2>Profile Content Goes Here</h2>
+									<img src="http://lorempixel.com/400/400/cats/2" alt="Cats" />
+								</div>
+								<div class="tab-pane fade" id="messages">
+									<h2>Messages Content Goes Here</h2>
+									<img src="http://lorempixel.com/400/400/cats/3" alt="Cats" />
+								</div>
+								<div class="tab-pane fade" id="settings">
+									<h2>Settings Content Goes Here</h2>
+									<img src="http://lorempixel.com/400/400/cats/4" alt="Cats" />
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<th:block layout:fragment="script">
+		<script type="text/javascript" th:src="@{/js/pages/eleve.js}"></script>
+	</th:block>
+
+	<!-- /page content -->
+</body>
+</html>

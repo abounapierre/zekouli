@@ -5,9 +5,11 @@
  */
 package com.abouna.zekouli_ui.configs;
 
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -77,16 +79,13 @@ public class ZekouliUIConfig implements WebMvcConfigurer {
 		registry.addInterceptor(localeChangeInterceptor());
 	}
 
-	/*
-	 * @Override public void addViewControllers(ViewControllerRegistry registry) {
-	 * registry.addViewController("/").setViewName("home"); }
-	 */
+	@Bean
+	public ResourceBundleMessageSource messageSource() {
 
-	/*@Bean
-	public ObjectMapper serializingObjectMapper() {
-		ObjectMapper objectMapper = new ObjectMapper();
-		objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-		objectMapper.registerModule(new JavaTimeModule());
-		return objectMapper;
-	}*/
+		ResourceBundleMessageSource source = new ResourceBundleMessageSource();
+		source.setBasenames("messages");
+		source.setUseCodeAsDefaultMessage(true);
+
+		return source;
+	}
 }

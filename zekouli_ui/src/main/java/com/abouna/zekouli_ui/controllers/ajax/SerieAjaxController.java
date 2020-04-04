@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.abouna.zekouli_ui.data.models.SerieModel;
+import com.abouna.zekouli_ui.data.dtos.SerieDto;
 import com.abouna.zekouli_ui.services.SerieService;
 
 @RestController
@@ -19,7 +19,7 @@ public class SerieAjaxController {
 	
 	
 	@GetMapping("/etablissement/{id}")
-	public List<SerieModel> getListeParEtablissement(@PathVariable Long id){
+	public List<SerieDto> getListeParEtablissement(@PathVariable Long id){
 		return serieService.getListeParEtablissement(id);
 	}
 }

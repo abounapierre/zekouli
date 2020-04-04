@@ -1,5 +1,5 @@
-package com.abouna.zekouli_ui.data.models;
+package com.abouna.zekouli_ui.data.dtos;
 
-public class SesctionModel {
+public class SesctionDto {
 
 }

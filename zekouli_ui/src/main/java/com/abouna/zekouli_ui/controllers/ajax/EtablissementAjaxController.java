@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.abouna.zekouli_ui.data.models.EtablissementModel;
+import com.abouna.zekouli_ui.data.dtos.EtablissementDto;
 import com.abouna.zekouli_ui.services.EtablissementService;
 
 @RestController
@@ -18,7 +18,7 @@ public class EtablissementAjaxController {
 
 	
 	@GetMapping
-	public List<EtablissementModel> getEtablissementList() {
+	public List<EtablissementDto> getEtablissementList() {
 		return etablissementService.getListe();
 	}
 }

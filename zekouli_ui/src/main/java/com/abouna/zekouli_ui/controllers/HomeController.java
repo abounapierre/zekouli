@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author abouna
  */
 @Controller
-public class HomeController extends AbstractController{   
+public class HomeController{   
     
     @GetMapping("/home")
     public String getHome(Model model){
@@ -24,7 +24,6 @@ public class HomeController extends AbstractController{
     }
     
 
-	@Override
 	@GetMapping("/")
 	public String getTemplate(Model model) {
 		return "home";

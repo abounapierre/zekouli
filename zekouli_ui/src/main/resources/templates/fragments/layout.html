@@ -88,7 +88,20 @@
     
     <!-- Custom Theme Scripts -->
     <script th:src="@{/js/custom.min.js}"></script>
+    <script th:src="@{/js/notify.min.js}"></script>
     <script th:src="@{/js/global.js}"></script>
+    <script th:inline="javascript">
+		/*<![CDATA[*/
+		    var msg = /*[[${messageModel}]]*/null;
+			if(msg !== null){
+				if(msg.type == 'error'){
+					$.notify(msg.message, "error",{ position:"center" });
+				}else if(msg.type == 'success'){
+					$.notify(msg.message,"success",  { position:"center" });
+				}
+			}
+		/*]]>*/
+	</script>
     <th:block layout:fragment="script"></th:block>
   </body>
 </html>

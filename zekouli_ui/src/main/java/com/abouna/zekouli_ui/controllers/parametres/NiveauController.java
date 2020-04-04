@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.abouna.zekouli_ui.controllers.AbstractController;
-import com.abouna.zekouli_ui.data.models.NiveauModel;
+import com.abouna.zekouli_ui.data.dtos.NiveauDto;
 import com.abouna.zekouli_ui.services.CycleService;
 import com.abouna.zekouli_ui.services.EtablissementService;
 import com.abouna.zekouli_ui.services.NiveauService;
 
 @Controller
 @RequestMapping("/niveau")
-public class NiveauController extends AbstractController{
+public class NiveauController extends AbstractController<NiveauDto>{
 
 	@Autowired
 	private NiveauService service;
@@ -33,18 +33,18 @@ public class NiveauController extends AbstractController{
 	@GetMapping
 	public String getTemplate(Model model) {
 		model.addAttribute("niveaux", service.getListe());
-		model.addAttribute("niveauModel", new NiveauModel());
+		model.addAttribute("niveauModel", new NiveauDto());
 		model.addAttribute("etablissements", etService.getListe());
 		return "parametre/niveau";
 	}
 
 	@PostMapping("/enregister")
-	public String enregistre(@ModelAttribute("niveauModel") @Valid NiveauModel niveauModel,
+	public String enregistre(@ModelAttribute("niveauModel") @Valid NiveauDto niveauModel,
 			BindingResult result, Model model) {
 		if (!result.hasErrors() && niveauModel.getCode() != null && niveauModel.getLibelle() != null) {
-			service.enregistrerOuModifier(niveauModel);
+			service.enregistrerOuModifier(niveauModel,niveauModel.getId());
 			model.addAttribute("message", "success");
-			model.addAttribute("niveauModel", new NiveauModel());
+			model.addAttribute("niveauModel", new NiveauDto());
 		}
 		model.addAttribute("niveaux", service.getListe());
 		model.addAttribute("etablissements", etService.getListe());
@@ -53,7 +53,7 @@ public class NiveauController extends AbstractController{
 
 	@GetMapping("/modifier/{id}")
 	public String showUpdateForm(@PathVariable("id") Long id, Model model) {
-		NiveauModel niveauModel = service.obtenirParId(id);
+		NiveauDto niveauModel = service.obtenirParId(id);
 		if (niveauModel != null) {
 			model.addAttribute("niveauModel", niveauModel);
 			model.addAttribute("cycles", cycleService.getListeParEtablissement(niveauModel.getEtablissement().getId()));
@@ -67,17 +67,23 @@ public class NiveauController extends AbstractController{
 	public String supprimer(@PathVariable("id") Long id, Model model) {
 		service.supprimer(id);
 		model.addAttribute("niveaux", service.getListe());
-		model.addAttribute("niveauModel", new NiveauModel());
+		model.addAttribute("niveauModel", new NiveauDto());
 		model.addAttribute("etablissements", etService.getListe());
 		return "parametre/niveau";
 	}
 
 	@GetMapping("/annuler")
 	public String initialiserFormulaire(Model model) {
-		model.addAttribute("niveauModel", new NiveauModel());
+		model.addAttribute("niveauModel", new NiveauDto());
 		model.addAttribute("niveaux", service.getListe());
 		model.addAttribute("etablissements", etService.getListe());
 		return "parametre/niveau";
+	}
+
+	@Override
+	protected boolean validerFormulaire(NiveauDto dto, Model model) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

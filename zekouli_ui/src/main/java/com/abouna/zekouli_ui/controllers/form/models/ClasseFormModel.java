@@ -1,7 +1,7 @@
-package com.abouna.zekouli_ui.vue.dto;
+package com.abouna.zekouli_ui.controllers.form.models;
 
-import com.abouna.zekouli_ui.data.models.ClasseModel;
-import com.abouna.zekouli_ui.data.models.EtablissementModel;
+import com.abouna.zekouli_ui.data.dtos.ClasseDto;
+import com.abouna.zekouli_ui.data.dtos.EtablissementDto;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -15,11 +15,11 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ClasseForm extends ClasseModel{
+public class ClasseFormModel extends ClasseDto{
 	/**
 	 * 
 	 */
 	static final long serialVersionUID = -4904414151732001931L;
-	EtablissementModel etablissement;
+	EtablissementDto etablissement;
 
 }

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.abouna.zekouli_ui.data.models.CycleModel;
+import com.abouna.zekouli_ui.data.dtos.CycleDto;
 import com.abouna.zekouli_ui.services.CycleService;
 
 @RestController
@@ -18,7 +18,7 @@ public class CycleAjaxController {
 	private CycleService cycleService;
 	
 	@GetMapping("/etablissement/{id}")
-	public List<CycleModel> getListeCycleParEtablissement(@PathVariable Long id){
+	public List<CycleDto> getListeCycleParEtablissement(@PathVariable Long id){
 		return cycleService.getListeParEtablissement(id);
 	}
 }

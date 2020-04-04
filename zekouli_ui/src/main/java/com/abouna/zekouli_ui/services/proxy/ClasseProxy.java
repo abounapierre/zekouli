@@ -1,7 +1,7 @@
 package com.abouna.zekouli_ui.services.proxy;
 
-import com.abouna.zekouli_ui.data.models.ClasseModel;
+import com.abouna.zekouli_ui.data.dtos.ClasseDto;
 
-public interface ClasseProxy extends AbstractProxy<ClasseModel, Long>{
+public interface ClasseProxy extends AbstractProxy<ClasseDto, Long>{
 
 }

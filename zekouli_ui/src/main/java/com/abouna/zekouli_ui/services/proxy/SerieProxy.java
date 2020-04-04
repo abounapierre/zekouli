@@ -2,12 +2,12 @@ package com.abouna.zekouli_ui.services.proxy;
 
 import java.util.List;
 
-import com.abouna.zekouli_ui.data.models.SerieModel;
+import com.abouna.zekouli_ui.data.dtos.SerieDto;
 
 import feign.Param;
 import feign.RequestLine;
 
-public interface SerieProxy extends AbstractProxy<SerieModel, Long>{
+public interface SerieProxy extends AbstractProxy<SerieDto, Long>{
 	@RequestLine("GET /etablissement/{id}")
-	List<SerieModel> getListeParEtablissement(@Param("id") Long id);
+	List<SerieDto> getListeParEtablissement(@Param("id") Long id);
 }

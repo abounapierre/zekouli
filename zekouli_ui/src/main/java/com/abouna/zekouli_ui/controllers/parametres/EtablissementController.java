@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.abouna.zekouli_ui.controllers.AbstractController;
-import com.abouna.zekouli_ui.data.models.EtablissementModel;
+import com.abouna.zekouli_ui.data.dtos.EtablissementDto;
 import com.abouna.zekouli_ui.services.EtablissementService;
 import com.abouna.zekouli_ui.services.TypeEtablissementService;
 
 @Controller
-public class EtablissementController extends AbstractController {
+public class EtablissementController extends AbstractController<EtablissementDto> {
 	@Autowired
 	private EtablissementService service;
 	@Autowired
@@ -28,19 +28,19 @@ public class EtablissementController extends AbstractController {
 	public String getTemplate(Model model) {
 		model.addAttribute("etablissements", service.getListe());
 		model.addAttribute("typeEtablissements", typeService.getListe());
-		model.addAttribute("etablissementModel", new EtablissementModel());
+		model.addAttribute("etablissementModel", new EtablissementDto());
 		return "parametre/etablissement";
 	}
 
 	@PostMapping("/etablissement/enregister")
-	public String enregistre(@ModelAttribute("etablissementModel") @Valid EtablissementModel etablissementModel,
+	public String enregistre(@ModelAttribute("etablissementModel") @Valid EtablissementDto etablissementModel,
 			BindingResult result, Model model) {
 		if (!result.hasErrors() && etablissementModel.getCode() != null && etablissementModel.getLibelle() != null
 				&& etablissementModel.getTypeEtablissement() != null) {
-			service.enregistrerOuModifier(etablissementModel);
+			service.enregistrerOuModifier(etablissementModel,etablissementModel.getId());
 			model.addAttribute("message", "success");
 		}
-		model.addAttribute("etablissementModel", new EtablissementModel());
+		model.addAttribute("etablissementModel", new EtablissementDto());
 		model.addAttribute("etablissements", service.getListe());
 		model.addAttribute("typeEtablissements", typeService.getListe());
 		return "parametre/etablissement";
@@ -48,7 +48,7 @@ public class EtablissementController extends AbstractController {
 
 	@GetMapping("/etablissement/modifier/{id}")
 	public String showUpdateForm(@PathVariable("id") Long id, Model model) {
-		EtablissementModel etablissementModel = service.obtenirParId(id);
+		EtablissementDto etablissementModel = service.obtenirParId(id);
 		if (etablissementModel != null) {
 			model.addAttribute("etablissementModel", etablissementModel);
 		}
@@ -62,16 +62,22 @@ public class EtablissementController extends AbstractController {
 		service.supprimer(id);
 		model.addAttribute("etablissements", service.getListe());
 		model.addAttribute("typeEtablissements", typeService.getListe());
-		model.addAttribute("etablissementModel", new EtablissementModel());
+		model.addAttribute("etablissementModel", new EtablissementDto());
 		return "parametre/etablissement";
 	}
 
 	@GetMapping("/etablissement/annuler")
 	public String initialiserFormulaire(Model model) {
-		model.addAttribute("etablissementModel", new EtablissementModel());
+		model.addAttribute("etablissementModel", new EtablissementDto());
 		model.addAttribute("typeEtablissements", typeService.getListe());
 		model.addAttribute("etablissements", service.getListe());
 		return "parametre/etablissement";
+	}
+
+	@Override
+	protected boolean validerFormulaire(EtablissementDto dto, Model model) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
