@@ -1,4 +1,4 @@
-package com.abouna.zekouli_bo.data.models;
+package com.abouna.zekouli_bo.data.dtos;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -14,17 +14,14 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper=false,of= {"libelle","code"})
-@ToString(of= {"libelle","code"})
-public class ClasseDto extends AbstractDto{
+@EqualsAndHashCode(callSuper=false,of= {"anneeScolaire","eleve","classe"})
+@ToString(of= {"anneeScolaire","eleve","classe"})
+public class InscriptionDto extends AbstractDto{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 7161326317628975545L;
-	String libelle;
-	String code;
-	CycleDto cycle;
-	NiveauDto niveau;
-	SerieDto serie;
-	
+	static final long serialVersionUID = -211469090155371693L;
+	AnneeScolaireDto anneeScolaire;
+	EleveDto eleve;
+	ClasseDto classe;
 }

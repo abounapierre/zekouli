@@ -61,6 +61,10 @@ and open the template in the editor.
 	background-color:  #00996f;
 }
 
+.btn_table_inscription{
+	background-color: #b3cb17;
+}
+
 img {
     max-width: 100%;
     height: auto;

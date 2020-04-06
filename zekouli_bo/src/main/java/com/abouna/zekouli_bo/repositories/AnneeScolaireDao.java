@@ -8,4 +8,6 @@ import com.abouna.zekouli_bo.objet_metiers.AnneeScolaire;
 
 public interface AnneeScolaireDao extends JpaRepository<AnneeScolaire, Long>{
 	Optional<AnneeScolaire> findByEnCours(boolean enCours);
+
+	Optional<AnneeScolaire> findByCode(String code);
 }

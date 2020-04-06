@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.abouna.zekouli_bo.data.models.SerieDto;
+import com.abouna.zekouli_bo.data.dtos.SerieDto;
 import com.abouna.zekouli_bo.mappers.SerieMapper;
 import com.abouna.zekouli_bo.objet_metiers.Etablissement;
 import com.abouna.zekouli_bo.objet_metiers.Serie;

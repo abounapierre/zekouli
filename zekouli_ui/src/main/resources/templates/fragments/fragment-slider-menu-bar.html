@@ -2,7 +2,7 @@
     <div class="menu_section">
         <h3><span data-th-text="#{application_menu_title}"></span></h3>
         <ul class="nav side-menu">
-            <li><a data-th-href="@{/home}"><i class="fa fa-home"></i><span data-th-text="#{application_menu_home}"></span><span class="fa fa-chevron-down"></span></a>
+            <li><a data-th-href="@{/home}"><i class="fa fa-home"></i><span data-th-text="#{application_menu_home}"></span></a>
             </li>
             <li><a><i class="fa fa-edit"></i> <span data-th-text="#{application_menu_parametere}"></span> <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
@@ -19,25 +19,15 @@
                     <li><a data-th-href="@{/matiere}"><span data-th-text="#{application_menu_parametere_matiere}"></span></a></li>                   
                 </ul>
             </li>
-            <li><a><i class="fa fa-desktop"></i> <span data-th-text="#{application_menu_student}"></span> <span class="fa fa-chevron-down"></span></a>
+            <li><a><i class="fa fa-user"></i><span data-th-text="#{application_menu_student}"></span> <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                    <li><a href="general_elements"><span data-th-text="#{application_menu_student_enregistrement}"></span></a></li>
-                    <li><a href="media_gallery.html"><span data-th-text="#{application_menu_student_annuler_enregistrement}"></span></a></li>
-                    <li><a href="typography.html"><span data-th-text="#{application_menu_student_import_fichier_excel}"></span></a></li>
-                    <li><a href="icons.html"><span data-th-text="#{application_menu_student_mettre_a_jour}"></span></a></li>
-                    <li><a href="glyphicons.html"><span data-th-text="#{application_menu_student_affichier_etudiant}"></span></a></li>
-                    <li><a href="widgets.html"><span data-th-text="#{application_menu_student_inscript_academique}"></span></a></li>
-                    <li><a href="invoice.html"><span data-th-text="#{application_menu_student_inscript_par_lot}"></span></a></li>
-                    <li><a href="inbox.html"><span data-th-text="#{application_menu_student_reconduire_inscription}"></span></a></li>
-                    <li><a href="calendar.html"><span data-th-text="#{application_menu_student_inscript_par_transfert}"></span></a></li>
-                    <li><a href="glyphicons.html"><span data-th-text="#{application_menu_student_inscription_concours}"></span></a></li>
-                    <li><a href="widgets.html"><span data-th-text="#{application_menu_student_inscription_evaluation}"></span></a></li>
-                    <li><a href="invoice.html"><span data-th-text="#{application_menu_student_maj_matricule}"></span></a></li>
-                    <li><a href="inbox.html"><span data-th-text="#{application_menu_student_nationalite}"></span></a></li>
-                    <li><a href="calendar.html"><span data-th-text="#{application_menu_student_config_impression}"></span></a></li>
+                    <li><a data-th-href="@{/eleve}"><i class="fa fa-user"></i><span data-th-text="#{application_menu_student_leve}"></span></a>  </li>
+                    <li><a data-th-href="@{/inscription}"><i class="fa fa-pencil"></i><span data-th-text="#{application_menu_student_inscription}"></span></a>  </li>
                 </ul>
             </li>
-            <li><a><i class="fa fa-table"></i> <span data-th-text="#{application_menu_scolarity}"></span> <span class="fa fa-chevron-down"></span></a>
+            
+          
+            <!-- <li><a><i class="fa fa-table"></i> <span data-th-text="#{application_menu_scolarity}"></span> <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li><a href="general_elements.html"><span data-th-text="#{application_menu_student_enregistrement}"></span></a></li>
                     <li><a href="media_gallery.html"><span data-th-text="#{application_menu_student_annuler_enregistrement}"></span></a></li>
@@ -90,7 +80,7 @@
                     <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
                     <li><a href="fixed_footer.html">Fixed Footer</a></li>
                 </ul>
-            </li>
+            </li>-->
         </ul>
     </div>
 </div>

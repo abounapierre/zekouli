@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.abouna.zekouli_bo.business.NiveauBusinessService;
-import com.abouna.zekouli_bo.data.models.NiveauDto;
+import com.abouna.zekouli_bo.data.dtos.NiveauDto;
 
 @RestController
 @RequestMapping("/niveaux")

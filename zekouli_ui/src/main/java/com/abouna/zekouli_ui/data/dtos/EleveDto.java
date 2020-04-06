@@ -1,4 +1,4 @@
-package com.abouna.zekouli_bo.data.models;
+package com.abouna.zekouli_ui.data.dtos;
 
 import java.time.LocalDate;
 
@@ -11,7 +11,6 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,23 +22,29 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper=false,of= {"debut","code","fin"})
-@ToString(of= {"debut","code","fin","enCours"})
-public class AnneeScolaireDto extends AbstractDto{
+@ToString(callSuper=true,of= {"nom","prenom","matricule","sexe"})
+public class EleveDto extends AbstractDto{
 	/**
 	 * 
 	 */
-	static final long serialVersionUID = 1277024681662039495L;
-	String code;
-	Long debut;
-	Long fin;
-	boolean enCours;
+	private static final long serialVersionUID = 6539270622304172799L;
+	String nom;
+	String prenom;
+	Sexe sexe;
+	String matricule;
+	String nomPere;
+	String nomMere;
+	String contact;
 	@JsonDeserialize(using = LocalDateDeserializer.class)
 	@JsonSerialize(using = LocalDateSerializer.class)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	LocalDate jourDebut;
-	@JsonDeserialize(using = LocalDateDeserializer.class)
-	@JsonSerialize(using = LocalDateSerializer.class)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	LocalDate jourFin;
+	LocalDate dateDeNaissance;
+	String lieuNaissance;
+	String departement;
+	String region;
+	String arrondissement;
+	String description;
+	byte[] photo;
+	boolean nouveau;
+
 }

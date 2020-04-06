@@ -2,7 +2,7 @@ package com.abouna.zekouli_bo.business;
 
 import org.springframework.stereotype.Service;
 
-import com.abouna.zekouli_bo.data.models.MatiereDto;
+import com.abouna.zekouli_bo.data.dtos.MatiereDto;
 import com.abouna.zekouli_bo.mappers.MatiereMapper;
 import com.abouna.zekouli_bo.objet_metiers.Matiere;
 import com.abouna.zekouli_bo.repositories.MatiereDao;

@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.abouna.zekouli_bo.data.models.ClasseDto;
+import com.abouna.zekouli_bo.data.dtos.ClasseDto;
 import com.abouna.zekouli_bo.mappers.ClasseMapper;
 import com.abouna.zekouli_bo.objet_metiers.Classe;
 import com.abouna.zekouli_bo.objet_metiers.Cycle;

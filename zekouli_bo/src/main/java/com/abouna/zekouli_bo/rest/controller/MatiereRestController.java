@@ -2,7 +2,7 @@ package com.abouna.zekouli_bo.rest.controller;import org.springframework.web.bin
 import org.springframework.web.bind.annotation.RestController;
 
 import com.abouna.zekouli_bo.business.MatiereBusinessService;
-import com.abouna.zekouli_bo.data.models.MatiereDto;
+import com.abouna.zekouli_bo.data.dtos.MatiereDto;
 
 @RestController
 @RequestMapping("/matieres")

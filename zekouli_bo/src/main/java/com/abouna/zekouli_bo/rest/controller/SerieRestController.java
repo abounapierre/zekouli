@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.abouna.zekouli_bo.business.SerieBusinessService;
-import com.abouna.zekouli_bo.data.models.SerieDto;
+import com.abouna.zekouli_bo.data.dtos.SerieDto;
 
 @RestController
 @RequestMapping("/series")

@@ -26,7 +26,7 @@ public class AnneeScolaireController extends AbstractController<AnneeScolaireDto
 	@Autowired
 	private AnneeScolaireService service;
 	@Autowired
-    private MessageSource messageSource;
+	private MessageSource messageSource;
 
 	@Override
 	@GetMapping
@@ -40,18 +40,32 @@ public class AnneeScolaireController extends AbstractController<AnneeScolaireDto
 	public String enregistre(@ModelAttribute("anneeScolaireModel") @Valid AnneeScolaireDto anneeScolaireModel,
 			BindingResult result, Model model) {
 		if (validerFormulaire(anneeScolaireModel, model)) {
-			service.enregistrerAnnee(anneeScolaireModel);
-			model.addAttribute("anneeScolaireModel", new AnneeScolaireDto());
+			String code = anneeScolaireModel.getJourDebut().getYear() + "-" + anneeScolaireModel.getJourFin().getYear();
+			if(anneeScolaireModel.getId() == null ) {
+				if (service.getAnneeScolaireParCode(code) == null) {
+					service.enregistrerAnnee(anneeScolaireModel);
+					model.addAttribute("anneeScolaireModel", new AnneeScolaireDto());
+				} else {
+					String[] param = new String[] { code };
+					model.addAttribute("messageModel", new MessageForm(
+							messageSource.getMessage("application_parametre_annee_scolaire_message_erreur_3", param, null),
+							"error"));
+				}
+			}else {
+				service.enregistrerAnnee(anneeScolaireModel);
+				model.addAttribute("anneeScolaireModel", new AnneeScolaireDto());
+			}
 		}
 		model.addAttribute("anneeScolaires", service.getListe());
 		return "parametre/annee-scolaire";
 	}
-/**
- * 
- * @param id
- * @param model
- * @return
- */
+
+	/**
+	 * 
+	 * @param id
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/modifier/{id}")
 	public String showUpdateForm(@PathVariable("id") Long id, Model model) {
 		AnneeScolaireDto anneeScolaireDto = service.obtenirParId(id);
@@ -87,7 +101,7 @@ public class AnneeScolaireController extends AbstractController<AnneeScolaireDto
 		model.addAttribute("anneeScolaires", service.getListe());
 		return "parametre/annee-scolaire";
 	}
-	
+
 	/**
 	 * valider le formulaire.
 	 * 
@@ -98,17 +112,24 @@ public class AnneeScolaireController extends AbstractController<AnneeScolaireDto
 	protected boolean validerFormulaire(AnneeScolaireDto anneeScolaireModel, Model model) {
 		LocalDate debut = anneeScolaireModel.getJourDebut();
 		LocalDate fin = anneeScolaireModel.getJourFin();
-		if(debut == null || fin == null) {
-			model.addAttribute("messageModel",new MessageForm(messageSource.getMessage("application_parametre_annee_scolaire_message_erreur_1", null, null), "error"));
+		if (debut == null || fin == null) {
+			model.addAttribute("messageModel", new MessageForm(
+					messageSource.getMessage("application_parametre_annee_scolaire_message_erreur_1", null, null),
+					"error"));
 			return false;
-		}else if (debut.isAfter(fin)) {
-			model.addAttribute("messageModel",new MessageForm(messageSource.getMessage("application_parametre_annee_scolaire_message_erreur_2", null, null), "error"));
+		} else if (debut.isAfter(fin)) {
+			model.addAttribute("messageModel", new MessageForm(
+					messageSource.getMessage("application_parametre_annee_scolaire_message_erreur_2", null, null),
+					"error"));
 			return false;
-		}else {
-			model.addAttribute("messageModel",new MessageForm(messageSource.getMessage("application_parametre_annee_scolaire_message_ok", null, null), "success"));
+		} else {
+			model.addAttribute("messageModel",
+					new MessageForm(
+							messageSource.getMessage("application_parametre_annee_scolaire_message_ok", null, null),
+							"success"));
 			return true;
 		}
-		
+
 	}
 
 }

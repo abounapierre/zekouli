@@ -2,7 +2,7 @@ package com.abouna.zekouli_bo.business;
 
 import java.util.List;
 
-import com.abouna.zekouli_bo.data.models.AbstractDto;
+import com.abouna.zekouli_bo.data.dtos.AbstractDto;
 
 public interface GenericBusinessService <U extends AbstractDto,ID extends Object>{
 	public U enregistrer(U model);

@@ -1,0 +1,82 @@
+<div data-th-fragment="panneau_liste">
+	<h2>[[#{application_parametre_eleve_liste_titre}]]</h2>
+	<div class="x_panel">
+		<form th:action="@{/eleve/rechercher}" method="post"
+			th:object="${rechercheModel}">
+				<div>
+					<div class="col-xs-6 form-group">
+						<label>[[#{application_parametre_eleve_form_recherche_nom}]]</label> <input
+							class="form-control" id="" type="text"
+							th:field=" *{nom}" />
+					</div>
+					<div class="col-xs-6 form-group">
+						<label>[[#{application_parametre_eleve_form_recherche_matricule}]]</label> <input
+							class="form-control" id="" type="text"
+							th:field=" *{matricule}" />
+					</div>
+					<div class="col-xs-12">
+						<input type="submit" th:value="#{application_bouton_rechercher}"
+							class="btn btn-primary btn-valider" id="btn-charger"/>
+					</div>
+				</div>
+		</form>
+	</div>
+	<div class="x_panel">
+		<table
+			class="table table-sm table-bordered table-striped mb-0 table-fixed">
+			<thead>
+				<tr>
+					<th class="col-xs-4">[[#{application_parametre_eleve_form_nom_prenom}]]</th>
+					<th class="col-xs-2">[[#{application_parametre_eleve_form_matricule}]]</th>
+					<th class="col-xs-2">[[#{application_parametre_eleve_form_ddn}]]</th>
+					<th class="col-xs-2">[[#{application_parametre_eleve_form_ldn}]]</th>
+					<th class="col-xs-2">[[#{application_parametre_eleve_form_action}]]</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="eleve : ${eleves}">
+					<td th:text="|${eleve.nom} ${eleve.prenom}|" class="col-xs-4"></td>
+					<td th:text="${eleve.matricule}" class="col-xs-2"></td>
+					<td
+						th:text="${eleve.dateDeNaissance != null} ? ${eleve.dateDeNaissance} : 'null'"
+						class="col-xs-2"></td>
+					<td
+						th:text="${eleve.lieuNaissance != null} ? ${eleve.lieuNaissance} : 'null'"
+						class="col-xs-2"></td>
+					<td class="col-xs-2"><button
+							th:attr="data-target=|#myModal${eleve.id}|"
+							class="btn btn_table btn_table_suppr" data-toggle="modal">
+							<i class="fa fa-trash"></i>
+						</button> <a th:href="@{/eleve/modifier/{id}(id=${eleve.id})}"
+						class="btn btn_table btn_table_modif"> <i class="fa fa-pencil"></i>
+					</a> 
+						<a th:href="@{/eleve/formulaire-inscription/{id}(id=${eleve.id})}"
+						class="btn btn_table btn_table_inscription"> <i class="fa fa-user"></i>
+					</a>
+					<!-- The Modal -->
+						<div class="modal fade" th:id="|myModal${eleve.id}|">
+							<div class="modal-dialog">
+								<div class="modal-content">
+
+									<!-- Modal Header -->
+									<div class="modal-header">
+										<h4 class="modal-title texte-message"
+											th:text="|#{application_parametre_eleve_table_modal_message} ${eleve.nom} ${eleve.prenom}?|"></h4>
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+									</div>
+
+									<!-- Modal footer -->
+									<div class="modal-footer">
+										<button type="button" class="btn btn-danger"
+											data-dismiss="modal">[[#{application_maodal_boutton_fermer}]]</button>
+										<a th:href="@{/eleve/supprimer/{id}(id=${eleve.id})}"
+											class="btn btn-success">[[#{application_maodal_boutton_valider}]]</a>
+									</div>
+								</div>
+							</div>
+						</div></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

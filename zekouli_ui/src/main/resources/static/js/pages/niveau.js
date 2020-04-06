@@ -1,6 +1,6 @@
 
-	function ajaxGet() {
-	var id = $("#etablissement option:selected").val();
+function ajaxGet() {
+  var id = $("#etablissement option:selected").val();
 	if (id != 0) {
 		$.ajax({
 			type : "GET",
@@ -10,7 +10,6 @@
 					$("#cycle").append(
 							$("<option/>").val(this.id).text(this.libelle));
 				});
-				$.notify("Access granted", "success");
 			},
 			error : function(e) {
 				console.log("ERROR: ", e);
@@ -18,5 +17,5 @@
 		});
 	} else {
 		$('#cycle').empty().append('<option></option>');
-	}
+   }
 }		

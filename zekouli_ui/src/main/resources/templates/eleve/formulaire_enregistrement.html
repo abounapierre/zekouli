@@ -1,0 +1,104 @@
+<div data-th-fragment="formulaire_enregistrement">
+	<h2>[[#{application_parametre_eleve_form_enregistrement_titre}]]</h2>
+	<div class="x_panel">
+		<div class="x_content">
+			<!-- debut formulaire -->
+			<form data-th-action="@{/eleve/enregistrer}"
+				th:object="${eleveModel}" method="post">
+				<script type="text/javascript" th:src="@{/js/pages/eleve.js}"></script>
+				<div>
+					<div class="img-preview img-preview-sm">
+						<a><img data-th-src="@{/images/user.png}"></a> <span><input
+							type="file" id="photo" th:field=" *{lienPhoto}" /></span>
+					</div>
+					<br />
+					<div class="col-xs-6 form-group">
+						<label>[[#{application_parametre_eleve_form_status}]]</label> <select
+							id="status" class="form-control" th:field="*{status}"
+							onchange="verouMat()">
+							<option data-th-each="status : ${statuss}"
+								data-th-value="${status}" data-th-utext="${status}" />
+						</select>
+					</div>
+					<div class="col-xs-6 form-group">
+						<label>[[#{application_parametre_eleve_form_matricule}]]</label> <input
+							class="form-control" type="text" id="matricule"
+							th:field=" *{matricule}"
+							th:attrappend="readonly=${readOnly == 'true'} ? 'true'" />
+					</div>
+					<div class="col-xs-6 form-group">
+						<label>[[#{application_parametre_eleve_form_nom}]]</label> <input
+							class="form-control" id="" type="text" th:field=" *{nom}" />
+					</div>
+					<div class="col-xs-6 form-group">
+						<label>[[#{application_parametre_eleve_form_prenom}]]</label> <input
+							class="form-control" type="text" id="prenom"
+							th:field=" *{prenom}" />
+					</div>
+					<div class="col-xs-6 form-group">
+						<label>[[#{application_parametre_eleve_form_sexe}]]</label> <select
+							id="libelleSexe" class="form-control" th:field="*{libelleSexe}">
+							<option data-th-each="libelleSexe : ${sexes}"
+								data-th-value="${libelleSexe}" data-th-utext="${libelleSexe}" />
+						</select>
+					</div>
+					<div class="col-xs-6 form-group">
+						<label>[[#{application_parametre_eleve_form_ddn}]]</label> <input
+							class="form-control" type="date" id="dateDeNaissance"
+							th:field=" *{dateDeNaissance}" />
+					</div>
+					<div class="col-xs-6 form-group">
+						<label>[[#{application_parametre_eleve_form_ldn}]]</label> <input
+							class="form-control" id="" type="text"
+							th:field=" *{lieuNaissance}" />
+					</div>
+					<div class="col-xs-6 form-group">
+						<label>[[#{application_parametre_eleve_form_contact}]]</label> <input
+							class="form-control" type="text" id="contact"
+							th:field=" *{contact}" />
+					</div>
+					<div class="col-xs-6 form-group">
+						<label>[[#{application_parametre_eleve_form_description}]]</label>
+						<input class="form-control" id="" type="text"
+							th:field=" *{description}" />
+					</div>
+					<div class="col-xs-6 form-group">
+						<label>[[#{application_parametre_eleve_form_nom_pere}]]</label> <input
+							class="form-control" type="text" id="nomPere"
+							th:field=" *{nomPere}" />
+					</div>
+					<div class="col-xs-6 form-group">
+						<label>[[#{application_parametre_eleve_form_nom_mere}]]</label> <input
+							class="form-control" type="text" id="nomPere"
+							th:field=" *{nomMere}" />
+					</div>
+					<div class="col-xs-6 form-group">
+						<label>[[#{application_parametre_eleve_form_region}]]</label> <select
+							id="region" class="form-control" th:field=" *{region}">
+							<option value=""></option>
+							<option data-th-each="region : ${regions}"
+								data-th-value="${region}" data-th-utext="${region}" />
+						</select>
+					</div>
+					<div class="col-xs-6 form-group">
+						<label>[[#{application_parametre_eleve_form_departement}]]</label>
+						<input class="form-control" id="" type="text"
+							th:field=" *{departement}" />
+					</div>
+					<div class="col-xs-6 form-group">
+						<label>[[#{application_parametre_eleve_form_arrondissement}]]</label>
+						<input class="form-control" id="" type="text"
+							th:field=" *{arrondissement}" />
+					</div>
+
+					<input type="submit" th:value="#{application_bouton_valider}"
+						class="btn btn-primary btn-valider" /> <a type="reset"
+						th:text="#{application_bouton_annuler}"
+						th:href="@{/eleve/annuler}" class="btn btn-warning btn-annuler"></a>
+				</div>
+				<input type="hidden" th:field="*{id}" id="id" />
+			</form>
+			<!-- fin formulaire -->
+		</div>
+	</div>
+</div>

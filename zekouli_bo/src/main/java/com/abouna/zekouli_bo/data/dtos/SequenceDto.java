@@ -1,4 +1,4 @@
-package com.abouna.zekouli_bo.data.models;
+package com.abouna.zekouli_bo.data.dtos;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

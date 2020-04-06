@@ -1,8 +1,10 @@
 package com.abouna.zekouli_bo.utils;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 
@@ -10,14 +12,30 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.abouna.zekouli_bo.data.models.EtablissementDto;
-import com.abouna.zekouli_bo.data.models.TypeEtablissementDto;
+import com.abouna.zekouli_bo.business.AnneeScolaireBusinessService;
+import com.abouna.zekouli_bo.business.ClasseBusinessService;
+import com.abouna.zekouli_bo.business.EleveBusinessService;
+import com.abouna.zekouli_bo.business.InscriptionBusinessService;
+import com.abouna.zekouli_bo.data.dtos.AnneeScolaireDto;
+import com.abouna.zekouli_bo.data.dtos.ClasseDto;
+import com.abouna.zekouli_bo.data.dtos.EleveDto;
+import com.abouna.zekouli_bo.data.dtos.EtablissementDto;
+import com.abouna.zekouli_bo.data.dtos.InscriptionDto;
+import com.abouna.zekouli_bo.data.dtos.TypeEtablissementDto;
+import com.abouna.zekouli_bo.mappers.ClasseMapper;
 import com.abouna.zekouli_bo.mappers.TypeEtablissementMapper;
+import com.abouna.zekouli_bo.objet_metiers.Classe;
+import com.abouna.zekouli_bo.objet_metiers.Eleve;
 import com.abouna.zekouli_bo.objet_metiers.GroupeMatiere;
+import com.abouna.zekouli_bo.objet_metiers.Inscription;
 import com.abouna.zekouli_bo.objet_metiers.Matiere;
+import com.abouna.zekouli_bo.repositories.AnneeScolaireDao;
+import com.abouna.zekouli_bo.repositories.ClasseDao;
 import com.abouna.zekouli_bo.repositories.CycleDao;
+import com.abouna.zekouli_bo.repositories.EleveDao;
 import com.abouna.zekouli_bo.repositories.EtablissementDao;
 import com.abouna.zekouli_bo.repositories.GroupeMatiereDao;
+import com.abouna.zekouli_bo.repositories.InscriptionDao;
 import com.abouna.zekouli_bo.repositories.MatiereDao;
 import com.abouna.zekouli_bo.repositories.TypeEtablissementDao;
 
@@ -36,6 +54,24 @@ public class FakeDatabase {
 	private GroupeMatiereDao dao;
 	@Autowired
 	private MatiereDao matiereDao;
+	@Autowired
+	private AnneeScolaireDao anneeScolaireDao;
+	@Autowired
+	private EleveDao eleveDao;
+	@Autowired
+	private InscriptionDao inscriptionDao;
+	@Autowired
+	private EleveBusinessService businessService;
+	@Autowired
+	private AnneeScolaireBusinessService anneeScolaireBusinessService;
+	@Autowired
+	private ClasseBusinessService classeBusinessService;
+	@Autowired
+	private InscriptionBusinessService inscriptionBusinessService;
+	@Autowired
+	private ClasseDao classeDao ;
+	@Autowired
+	private ClasseMapper classeMapper;
 
 	public List<EtablissementDto> getEtablissements() {
 		return etablissements;
@@ -115,7 +151,7 @@ public class FakeDatabase {
 		g1.setLibelle("Matieres scientifiques niveau 1");
 		g1.setUtilisateur("abouna");
 		//dao.save(g1);
-		
+		//save();
 	}
 
 	public EtablissementDto findByIde(Long id) {
@@ -166,5 +202,41 @@ public class FakeDatabase {
 		}
 	}
 	
-
+	public void save() {
+		for (int i = 0; i < 100; i++) {
+			i++;
+			EleveDto e = new EleveDto();
+			e.setNom("Eleve test " + i);
+			e.setPrenom("api" + i);
+			e.setLieuNaissance("Lieu" + i);
+			e.setDateDeNaissance(LocalDate.now());
+			//businessService.enregistrer(e);
+		}
+		AnneeScolaireDto anneeScolaireDto = new AnneeScolaireDto();
+		anneeScolaireDto.setCode("2018-2019");
+		anneeScolaireDto.setDebut(2018L);
+		anneeScolaireDto.setFin(2019L);
+		anneeScolaireDto.setJourDebut(LocalDate.of(2018, 9, 9));
+		anneeScolaireDto.setJourFin(LocalDate.of(2019, 5, 30));
+		anneeScolaireDto.setEnCours(false);
+		//AnneeScolaireDto aa = anneeScolaireBusinessService.enregistrer(anneeScolaireDto);	
+		int ii = 1;
+		for(Eleve ee : eleveDao.findAll()) {
+			Inscription inscriptionDto = new Inscription();
+			inscriptionDto.setAnneeScolaire(anneeScolaireDao.findAll().get(0));
+			inscriptionDto.setClasse(classeDao.findAll().get(1));
+			inscriptionDto.setEleve(ee);
+			inscriptionDto.setDateCreation(LocalDateTime.now());
+			inscriptionDto.setDateModification(LocalDateTime.now());
+			//inscriptionDao.save(inscriptionDto);
+			if(ii == 20) {
+				break;
+			}
+			ii++;
+		}
+		for(Inscription ins : inscriptionDao.findAll()) {
+			System.out.println(ins.getId());
+		}
+		
+	}
 }

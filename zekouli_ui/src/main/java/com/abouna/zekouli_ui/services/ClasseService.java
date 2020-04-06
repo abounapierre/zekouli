@@ -1,5 +1,7 @@
 package com.abouna.zekouli_ui.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.abouna.zekouli_ui.controllers.form.models.ClasseFormModel;
@@ -52,6 +54,10 @@ public class ClasseService extends AbstractServiceImpl<ClasseDto, Long> {
 			return form;
 		}
 		return null;
+	}
+
+	public List<ClasseDto> getListeClasseParEtablissement(Long id) {
+		return proxy.getListeClasseParEtablissement(id);
 	}
 
 }

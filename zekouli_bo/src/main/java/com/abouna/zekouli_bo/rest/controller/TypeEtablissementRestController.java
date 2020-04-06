@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.abouna.zekouli_bo.business.TypeEtablissmentBusinessService;
-import com.abouna.zekouli_bo.data.models.TypeEtablissementDto;
+import com.abouna.zekouli_bo.data.dtos.TypeEtablissementDto;
 
 @RestController
 @RequestMapping("/type-etablissements")

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{fragments/layout}">
+<head>
+<title>[[#{application_parametre_inscription_page_titre}]]</title>
+</head>
+
+<body>
+	<!-- page content -->
+	<div class="right_col" role="main" data-layout-fragment="content">
+		<div class="">
+			<div class="page-title">
+				<div class="title_left">
+					<h3>[[#{application_parametre_inscription_form_titre}]]</h3>
+				</div>
+			</div>
+
+			<div class="clearfix"></div>
+			<div class="row">
+				<div class="x_panel">
+					<div class="x_content">
+						<!-- debut formulaire -->
+						<form data-th-action="@{/inscription/rechercher}"
+							th:object="${inscriptionFormulaireRechercheModel}" method="post">
+							<script type="text/javascript"
+								th:src="@{/js/pages/inscription.js}"></script>
+							<div>
+								<div class="col-xs-4 form-group">
+									<label>[[#{application_parametre_inscription_form_etablissement}]]</label>
+									<select id="etablissement" class="form-control"
+										th:onchange="'chargerNiveaux();'">
+										<option value=""></option>
+										<option data-th-each="etablissement : ${etablissements}"
+											data-th-value="${etablissement.id}"
+											data-th-utext="${etablissement.libelle}" />
+									</select>
+								</div>
+								<div class="col-xs-4 form-group">
+									<label>[[#{application_parametre_inscription_form_niveau}]]</label>
+									<select id="niveau" class="form-control" th:onchange="'chargerClasses();'">
+										<option value=""></option>
+									</select>
+								</div>
+								<div class="col-xs-4 form-group">
+									<label>[[#{application_parametre_inscription_form_classe}]]</label>
+									<select id="classe" class="form-control" th:field=" *{classe}">
+										<option value=""></option>
+									</select>
+								</div>
+
+								<input type="submit" th:value="#{application_bouton_rechercher}"
+									class="btn btn-primary btn-valider" />
+							</div>
+						</form>
+						<!-- fin formulaire -->
+					</div>
+				</div>
+			</div>
+			<div class="x_panel">
+				<table
+					class="table table-sm table-bordered table-striped mb-0 table-fixed">
+					<thead>
+						<tr>
+							<th class="col-xs-3">[[#{application_parametre_inscription_form_annee}]]</th>
+							<th class="col-xs-5">[[#{application_parametre_inscription_form_eleve}]]</th>
+							<th class="col-xs-2">[[#{application_parametre_inscription_form_classe}]]</th>
+							<th class="col-xs-2">[[#{application_parametre_inscription_form_action}]]</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="inscription : ${inscriptions}">
+							<td
+								th:text="${inscription.anneeScolaire != null} ? ${inscription.anneeScolaire.code} : 'null'"
+								class="col-xs-3"></td>
+							<td
+								th:text="|${inscription.eleve.nom} ${inscription.eleve.prenom} (${inscription.eleve.matricule})|"
+								class="col-xs-5"></td>
+							<td
+								th:text="${inscription.classe != null} ? ${inscription.classe.code} : 'null'"
+								class="col-xs-2"></td>
+							<td class="col-xs-2"><button
+									th:attr="data-target=|#myModal${inscription.id}|"
+									class="btn btn_table btn_table_suppr" data-toggle="modal">
+									<i class="fa fa-trash"></i>
+								</button> <!-- The Modal -->
+								<div class="modal fade" th:id="|myModal${inscription.id}|">
+									<div class="modal-dialog">
+										<div class="modal-content">
+
+											<!-- Modal Header -->
+											<div class="modal-header">
+												<h4 class="modal-title texte-message"
+													th:text="|#{application_parametre_inscription_table_modal_message} ${inscription.eleve.nom} ${inscription.eleve.prenom} ${inscription.anneeScolaire.code}?|"></h4>
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+											</div>
+
+											<!-- Modal footer -->
+											<div class="modal-footer">
+												<button type="button" class="btn btn-danger"
+													data-dismiss="modal">[[#{application_maodal_boutton_fermer}]]</button>
+												<a th:href="@{/inscription/annuler/{id}(id=${inscription.id})}"
+													class="btn btn-success">[[#{application_maodal_boutton_valider}]]</a>
+											</div>
+										</div>
+									</div>
+								</div></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- /page content -->
+</body>
+</html>

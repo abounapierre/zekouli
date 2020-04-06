@@ -7,8 +7,10 @@ import org.springframework.context.annotation.Configuration;
 import com.abouna.zekouli_bo.mappers.AnneeScolaireMapper;
 import com.abouna.zekouli_bo.mappers.ClasseMapper;
 import com.abouna.zekouli_bo.mappers.CycleMapper;
+import com.abouna.zekouli_bo.mappers.EleveMapper;
 import com.abouna.zekouli_bo.mappers.EtablissementMapper;
 import com.abouna.zekouli_bo.mappers.GroupeMatiereMapper;
+import com.abouna.zekouli_bo.mappers.InscriptionMapper;
 import com.abouna.zekouli_bo.mappers.MatiereMapper;
 import com.abouna.zekouli_bo.mappers.NiveauMapper;
 import com.abouna.zekouli_bo.mappers.SequenceMapper;
@@ -17,7 +19,7 @@ import com.abouna.zekouli_bo.mappers.TrimestreMapper;
 import com.abouna.zekouli_bo.mappers.TypeEtablissementMapper;
 
 @Configuration
-public class SpringConfig {
+public class MapperConfig {
 
 	@Bean
 	TypeEtablissementMapper getTypeEtablissementMapper() {
@@ -72,6 +74,16 @@ public class SpringConfig {
 	@Bean
 	SequenceMapper getSequenceMapper() {
 		return Mappers.getMapper(SequenceMapper.class);
+	}
+	
+	@Bean
+	EleveMapper getEleveMapper() {
+		return Mappers.getMapper(EleveMapper.class);
+	}
+	
+	@Bean
+	InscriptionMapper getInscriptionMapper() {
+		return Mappers.getMapper(InscriptionMapper.class);
 	}
 	
 }

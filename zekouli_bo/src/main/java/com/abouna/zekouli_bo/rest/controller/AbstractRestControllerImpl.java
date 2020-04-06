@@ -3,7 +3,7 @@ package com.abouna.zekouli_bo.rest.controller;
 import java.util.List;
 
 import com.abouna.zekouli_bo.business.GenericBusinessService;
-import com.abouna.zekouli_bo.data.models.AbstractDto;
+import com.abouna.zekouli_bo.data.dtos.AbstractDto;
 
 public abstract class AbstractRestControllerImpl<T extends AbstractDto, ID extends Object> implements AbstractRestController<T, ID>{
 	private final GenericBusinessService<T, ID> service;

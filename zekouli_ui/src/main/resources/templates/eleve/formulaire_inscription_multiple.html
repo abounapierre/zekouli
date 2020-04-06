@@ -1,0 +1,75 @@
+<div data-th-fragment="formulaire_inscription_multiple">
+	<h2>[[#{application_parametre_eleve_form_inscription_titre}]]</h2>
+	<div class="x_panel">
+
+		<form th:action="@{/eleve/inscription}" method="post"
+			th:object="${inscriptionModel}">
+			<div>
+				<div>
+					<div class="col-xs-4 form-group">
+						<label>[[#{application_parametre_eleve_form_inscription_etablissement}]]</label>
+						<select id="etablissement" class="form-control"
+							onchange="chargerNiveaux()">
+							<option data-th-each="etablissement : ${etablissements}"
+								data-th-value="${etablissements}"
+								data-th-utext="${etablissement.libelle}" />
+						</select>
+					</div>
+					<div class="col-xs-4 form-group">
+						<label>[[#{application_parametre_eleve_form_inscription_niveau}]]</label>
+						<select id="niveau" class="form-control"
+							onchange="chargerClasses()">
+						</select>
+					</div>
+					<div class="col-xs-4 form-group">
+						<label>[[#{application_parametre_eleve_form_inscription_classe}]]</label>
+						<select id="classe" class="form-control">
+						</select>
+					</div>
+					<div class="col-xs-12">
+						<input type="button" th:value="#{application_bouton_charger}"
+							class="btn btn-primary btn-valider" id="btn-charger"
+							onclick="charger()" />
+					</div>
+				</div>
+				<br />
+				<br />
+				<div class="row">
+					<div class="col-xs-5">
+						<select name="from" id="multiselect" class="form-control" size="8"
+							multiple="multiple">
+							<option data-th-each="eleve : ${eleves}" data-th-value="${eleve}"
+								data-th-utext="|${eleve.nom} ${eleve.prenom} (${eleve.matricule})|" />
+						</select>
+					</div>
+					<div class="col-xs-2">
+						<button type="button" id="multiselect_rightAll"
+							class="btn btn-block">
+							<i class="glyphicon glyphicon-forward"></i>
+						</button>
+						<button type="button" id="multiselect_rightSelected"
+							class="btn btn-block">
+							<i class="glyphicon glyphicon-chevron-right"></i>
+						</button>
+						<button type="button" id="multiselect_leftSelected"
+							class="btn btn-block">
+							<i class="glyphicon glyphicon-chevron-left"></i>
+						</button>
+						<button type="button" id="multiselect_leftAll"
+							class="btn btn-block">
+							<i class="glyphicon glyphicon-backward"></i>
+						</button>
+					</div>
+					<div class="col-xs-5">
+						<select name="to" id="multiselect_to" class="form-control"
+							size="8" multiple="multiple" th:field="*{eleveInscrits}">
+						</select>
+					</div>
+				</div>
+				<input type="submit" th:value="#{application_bouton_valider}"
+					class="btn btn-primary btn-valider" id="btn-inscriprion" />
+			</div>
+		</form>
+
+	</div>
+</div>

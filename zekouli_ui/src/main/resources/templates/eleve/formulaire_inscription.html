@@ -1,0 +1,45 @@
+<div data-th-fragment="formulaire_inscription">
+<h2>[[#{application_parametre_eleve_form_inscription_titre}]]</h2>
+	<div class="x_panel">
+		<form th:action="@{/eleve/enregistrer-formulaire-inscription}" method="post"
+			th:object="${inscriptionModel}">
+				<div>
+					<div class="col-xs-12 form-group">
+						<label>[[#{application_parametre_inscription_form_eleve}]]</label> <input
+							class="form-control" id="eleve" type="text" readonly="true" 
+							th:value="${eleve.nom != null} ? |${eleve.nom} ${eleve.prenom} (${eleve.matricule})| : ' '"/>
+							<input type="hidden" th:field="*{idEleve}" id="id" />
+					</div>
+				</div>
+				<div>
+					<div class="col-xs-4 form-group">
+						<label>[[#{application_parametre_eleve_form_inscription_etablissement}]]</label>
+						<select id="etablissement" class="form-control"
+							onchange="chargerNiveaux()">
+							<option></option>
+							<option data-th-each="etablissement : ${etablissements}"
+								data-th-value="${etablissement.id}"
+								data-th-utext="${etablissement.libelle}" />
+						</select>
+					</div>
+					<div class="col-xs-4 form-group">
+						<label>[[#{application_parametre_eleve_form_inscription_niveau}]]</label>
+						<select id="niveau" class="form-control"
+							onchange="chargerClasses()">
+						</select>
+					</div>
+					<div class="col-xs-4 form-group">
+						<label>[[#{application_parametre_eleve_form_inscription_classe}]]</label>
+						<select id="classe" class="form-control" th:field="*{classe}">
+						</select>
+					</div>
+					<div class="col-xs-12">
+						<input type="submit" th:value="#{application_bouton_valider}"
+						class="btn btn-primary btn-valider" /> <a type="reset"
+						th:text="#{application_bouton_annuler}"
+						th:href="@{/formulaire-inscription/annuler}" class="btn btn-warning btn-annuler"></a>
+					</div>
+				</div>
+		</form>
+	</div>
+</div>

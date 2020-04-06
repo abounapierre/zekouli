@@ -1,7 +1,4 @@
-package com.abouna.zekouli_bo.data.models;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+package com.abouna.zekouli_bo.data.dtos;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -18,22 +15,15 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper=false,of= {"libelle","code"})
-@ToString(callSuper=true,of= {"libelle","code","email","site"})
-public class EtablissementDto extends AbstractDto{
+@ToString(of= {"libelle","code"})
+public class NiveauDto extends AbstractDto{
 	/**
 	 * serial number.
 	 */
-	static final long serialVersionUID = 2653318469846302778L;
-	@NotNull
+	static final long serialVersionUID = -6917561774096989422L;
 	String libelle;
-	@NotNull
 	String code;
-	@Email
-	String email;
-	String site;
-	byte[] logo;
-	Long telephone;
-	String adresse;
-	TypeEtablissementDto typeEtablissement;
-	
+	EtablissementDto etablissement;
+	CycleDto cycle;
+
 }

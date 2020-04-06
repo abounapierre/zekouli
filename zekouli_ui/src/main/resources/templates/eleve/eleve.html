@@ -3,8 +3,8 @@
 	xmlns:layout="http://www.w3.org/1999/xhtml"
 	data-layout-decorate="~{fragments/layout}">
 <head>
-<title>[[#{application_parametre_annee_scolaire_page_titre}]]</title>
- <link th:href="@{/css/eleve.css}" rel="stylesheet">
+<title>[[#{application_parametre_eleve_page_titre}]]</title>
+<link th:href="@{/css/eleve.css}" rel="stylesheet">
 </head>
 
 <body>
@@ -14,8 +14,7 @@
 			<div class="page-title">
 				<div class="title_left">
 					<h3>
-						<span
-							data-th-text="#{application_parametre_annee_scolaire_form_titre}"></span>
+						<span data-th-text="#{application_parametre_eleve_form_titre}"></span>
 					</h3>
 				</div>
 			</div>
@@ -29,40 +28,60 @@
 
 							<!-- Nav tabs -->
 							<ul class="nav nav-tabs" role="tablist">
-								<li class="active"><a href="#home" role="tab"
-									data-toggle="tab"> <icon class="fa fa-home"></icon> Home
+								<li th:class="${active == '1'} ? 'active'"><a href="#liste"
+									role="tab" data-toggle="tab"> <i
+										class="glyphicon glyphicon-search"></i>
+										[[#{application_parametre_eleve_liste}]]
 								</a></li>
-								<li><a href="#profile" role="tab" data-toggle="tab"> <i
-										class="fa fa-user"></i> Profile
+								<li th:class="${active == '2'} ? 'active'"><a
+									href="#enregistrement" role="tab" data-toggle="tab"> <i
+										class="glyphicon glyphicon-save-file"></i>
+										[[#{application_parametre_eleve_form_enregistrement}]]
 								</a></li>
-								<li><a href="#messages" role="tab" data-toggle="tab"> <i
-										class="fa fa-envelope"></i> Messages
+								<li th:class="${active == '3'} ? 'active'"><a
+									href="#inscription" role="tab" data-toggle="tab"> <i
+										class="fa fa-user"></i>
+										[[#{application_parametre_eleve_form_inscription}]]
 								</a></li>
-								<li><a href="#settings" role="tab" data-toggle="tab"> <i
-										class="fa fa-cog"></i> Settings
+								<li th:class="${active == '4'} ? 'active'"><a
+									href="#importation" role="tab" data-toggle="tab"> <i
+										class="fa fa-file-excel-o"></i>
+										[[#{application_parametre_eleve_form_importation}]]
 								</a></li>
 							</ul>
 
 							<!-- Tab panes -->
 							<div class="tab-content">
-								<div class="tab-pane fade active in" id="home">
-									<h2>Home Content Goes Here</h2>
-									<img src="http://lorempixel.com/400/400/cats/1" alt="Cats" />
+								<!-- zones des recherches -->
+								<div class="tab-pane fade"
+									th:classappend="${active == '1'} ? 'active in'" id="liste">
+									<div th:insert="eleve/liste :: panneau_liste"></div>
 								</div>
-								<div class="tab-pane fade" id="profile">
-									<h2>Profile Content Goes Here</h2>
-									<img src="http://lorempixel.com/400/400/cats/2" alt="Cats" />
+								<!-- fin zones des recherches -->
+								<!-- zone enregistrements -->
+								<div class="tab-pane fade"
+									th:classappend="${active == '2'} ? 'active in'"
+									id="enregistrement">
+									<div
+										th:insert="eleve/formulaire_enregistrement :: formulaire_enregistrement"></div>
 								</div>
-								<div class="tab-pane fade" id="messages">
-									<h2>Messages Content Goes Here</h2>
-									<img src="http://lorempixel.com/400/400/cats/3" alt="Cats" />
+								<!-- fin zone enregistrements -->
+								<!-- partie inscription -->
+								<div class="tab-pane fade" id="inscription"
+									th:classappend="${active == '3'} ? 'active in'">
+									<div
+										th:insert="eleve/formulaire_inscription :: formulaire_inscription"></div>
 								</div>
-								<div class="tab-pane fade" id="settings">
-									<h2>Settings Content Goes Here</h2>
-									<img src="http://lorempixel.com/400/400/cats/4" alt="Cats" />
+								<!-- fin partie inscription -->
+								<!-- partie importation excel -->
+								<div class="tab-pane fade" id="importation"
+									th:classappend="${active == '4'} ? 'active in'">
+									<h2>[[#{application_parametre_eleve_form_importation_titre}]]</h2>
+									<div class="x_panel"></div>
 								</div>
+								<!-- fin partie importation excel -->
 							</div>
-
+							<!-- fin tab panes -->
 						</div>
 					</div>
 				</div>
@@ -72,6 +91,11 @@
 	</div>
 	<th:block layout:fragment="script">
 		<script type="text/javascript" th:src="@{/js/pages/eleve.js}"></script>
+		<script type="text/javascript"
+			th:src="@{/js/multi-select/multiselect.min.js}"></script>
+		<script>
+			$('#multiselect').multiselect();
+		</script>
 	</th:block>
 
 	<!-- /page content -->

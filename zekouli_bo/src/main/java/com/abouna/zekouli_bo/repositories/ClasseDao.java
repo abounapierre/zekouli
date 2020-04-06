@@ -13,7 +13,7 @@ import com.abouna.zekouli_bo.objet_metiers.Niveau;
 import com.abouna.zekouli_bo.objet_metiers.Serie;
 
 public interface ClasseDao extends JpaRepository<Classe, Long>{
-	@Query("SELECT e FROM Classe e WHERE e.serie.etablissement = :etablissement OR e.niveau.etablissement = :etablissement OR e.cycle.etablissement = :etablissement")
+	@Query("SELECT e FROM Classe e WHERE e.niveau.etablissement = :etablissement")
 	List<Classe> findByEtablissement(@Param("etablissement") Etablissement etablissement);
 	
 	@Query("SELECT e FROM Classe e WHERE e.cycle = :cycle")

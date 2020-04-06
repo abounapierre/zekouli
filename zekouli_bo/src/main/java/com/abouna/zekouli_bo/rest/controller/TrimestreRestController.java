@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.abouna.zekouli_bo.business.TrimestreBusinessService;
-import com.abouna.zekouli_bo.data.models.TrimestreDto;
+import com.abouna.zekouli_bo.data.dtos.TrimestreDto;
 
 @RestController
 @RequestMapping("/trimestres")

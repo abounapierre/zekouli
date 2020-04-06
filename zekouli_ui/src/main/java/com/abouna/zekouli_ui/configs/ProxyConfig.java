@@ -7,8 +7,10 @@ import org.springframework.context.annotation.Configuration;
 import com.abouna.zekouli_ui.services.proxy.AnneeScolaireProxy;
 import com.abouna.zekouli_ui.services.proxy.ClasseProxy;
 import com.abouna.zekouli_ui.services.proxy.CycleProxy;
+import com.abouna.zekouli_ui.services.proxy.EleveProxy;
 import com.abouna.zekouli_ui.services.proxy.EtablissementProxy;
 import com.abouna.zekouli_ui.services.proxy.GroupeMatiereProxy;
+import com.abouna.zekouli_ui.services.proxy.InscriptionProxy;
 import com.abouna.zekouli_ui.services.proxy.MatiereProxy;
 import com.abouna.zekouli_ui.services.proxy.NiveauProxy;
 import com.abouna.zekouli_ui.services.proxy.SequenceProxy;
@@ -81,6 +83,16 @@ public class ProxyConfig {
 	@Bean
 	public AnneeScolaireProxy getAnneeScolaireProxy() {
 		return FeignConfig.getFeignClient(AnneeScolaireProxy.class,boConfig.getUrlComplete().concat("annee-scolaires"));
+	}
+	
+	@Bean
+	public EleveProxy getEleveProxy() {
+		return FeignConfig.getFeignClient(EleveProxy.class,boConfig.getUrlComplete().concat("eleves"));
+	}
+	
+	@Bean
+	public InscriptionProxy getInscriptionProxy() {
+		return FeignConfig.getFeignClient(InscriptionProxy.class,boConfig.getUrlComplete().concat("inscriptions"));
 	}
 
 }
